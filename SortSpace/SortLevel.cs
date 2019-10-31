@@ -8,41 +8,52 @@ namespace SortSpace
 {
     public static class SortLevel
     {
+        /*
+         *      Основные функции.
+         */
+        // Сортировка выбором.
+        //
         public static void SelectionSortStep(int[] array, int i)
         {
-            if (i < array.Length - 1) ExchangeValues(array, i, MinorElement(array, i + 1));
-        }
-
-        public static bool BubbleSortStep(int[] array)
-        {
-            bool Compared = false;
-            bool Changed = false;
-            for (int i = 0; ; i++)
+            if (i < array.Length - 1)
             {
-                if (i + 1 == array.Length)
-                {
-                    if (Changed)
-                    {
-                        if (!Compared) return false;
-                        i = 0;
-                        Compared = false;
-                    }
-                    else return true;
-                }
-                if (Compare(array[i], array[i + 1]))
-                {
-                    Changed = true;
-                    Compared = Changed;
-                    ExchangeValues(array, i, i + 1);
-                }
+                int m = MinorElement(array, i + 1);
+                if (array[m] < array[i]) ExchangeElements(array, i, m);
             }
         }
 
+        // Сортировка пузырьком.
+        //
+        public static bool BubbleSortStep(int[] array)
+        {
+            return Cyc(array, 0);
+        }
+
+
+        /*
+         *      Вспомогательные функции.
+         */
+        // Цикл обхода по всему массиву, сортируя элементы в порядке возрастания.
+        //      Возвращает true если сортировка не происходила;
+        //          false если был произведен хотя бы один обмен элементов между двумя ячейками.
+        //
+        public static bool Cyc(int[] array, int i)
+        {
+            if (i + 1 == array.Length) return true;
+            if (Compare(array[i], array[i + 1]) && ExchangeElements(array, i, i + 1)) return Cyc(array, 0) && false;
+            return Cyc(array, i + 1);
+        }
+
+        // Сравнение двух целочисленных значений.
+        //      Возвращает true если первый аргумент больше второго.
+        //
         public static bool Compare(int a, int b)
         {
             return a > b;
         }
 
+        // Находит наименьший элемент массива.
+        //
         public static int MinorElement(int[] array, int i)
         {
             int minor = i;
@@ -51,11 +62,14 @@ namespace SortSpace
             return minor;
         }
 
-        public static void ExchangeValues(int[] array, int i, int j)
+        // Меняет два элемента массива местами.
+        //
+        public static bool ExchangeElements(int[] array, int i, int j)
         {
             array[i] += array[j];
             array[j] = array[i] - array[j];
             array[i] = array[i] - array[j];
+            return true;
         }
     }
 }

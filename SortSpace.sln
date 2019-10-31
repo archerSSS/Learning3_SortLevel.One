@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortSpace", "SortSpace\SortSpace.csproj", "{48EB308B-555C-45BE-BE1C-CCDAF17BC22E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoTest_1", "AlgoTest_1\AlgoTest_1.csproj", "{FDA4F398-DBF6-46A8-94B4-76066393ECDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{48EB308B-555C-45BE-BE1C-CCDAF17BC22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48EB308B-555C-45BE-BE1C-CCDAF17BC22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48EB308B-555C-45BE-BE1C-CCDAF17BC22E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA4F398-DBF6-46A8-94B4-76066393ECDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA4F398-DBF6-46A8-94B4-76066393ECDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA4F398-DBF6-46A8-94B4-76066393ECDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA4F398-DBF6-46A8-94B4-76066393ECDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
