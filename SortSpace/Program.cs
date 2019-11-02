@@ -10,6 +10,7 @@ namespace SortSpace
     {
         public static void Main(string[] args)
         {
+            
         }
     }
 }

@@ -20,25 +20,44 @@ namespace SortSpace
         }
 
         // Сортировка пузырьком.
+        //      Проходит по всем элементам, проверяя является ли i-й элемент больше (i+1)-го.
+        //          Если такой элемент обнаруживается, то он меняется местами с (i+1)-м и возвращает значение false.
         //
         public static bool BubbleSortStep(int[] array)
         {
-            return Cyc(array, 0);
+            return BCycle(array, 0);
         }
 
+        // Сортировка пузырьком.
+        //
+        public static bool BubbleSortAll(int[] array)
+        {
+            return ACycle(array, 0);
+        }
 
         /*
          *      Вспомогательные функции.
          */
+        // Цикл обхода по всему массиву, сортируя все элементы в порядке возрастания.
+        //      Возвращает true если сортировка не происходила;
+        //          false если был произведен хотя бы один обмен элементов между двумя ячейками.
+        //
+        public static bool ACycle(int[] array, int i)
+        {
+            if (i + 1 == array.Length) return true;
+            if (Compare(array[i], array[i + 1]) && ExchangeElements(array, i, i + 1)) return ACycle(array, 0) && false;
+            return ACycle(array, i + 1);
+        }
+
         // Цикл обхода по всему массиву, сортируя элементы в порядке возрастания.
         //      Возвращает true если сортировка не происходила;
         //          false если был произведен хотя бы один обмен элементов между двумя ячейками.
         //
-        public static bool Cyc(int[] array, int i)
+        public static bool BCycle(int[] array, int i)
         {
             if (i + 1 == array.Length) return true;
-            if (Compare(array[i], array[i + 1]) && ExchangeElements(array, i, i + 1)) return Cyc(array, 0) && false;
-            return Cyc(array, i + 1);
+            if (Compare(array[i], array[i + 1]) && ExchangeElements(array, i, i + 1)) return BCycle(array, i + 1) && false;
+            return BCycle(array, i + 1);
         }
 
         // Сравнение двух целочисленных значений.
