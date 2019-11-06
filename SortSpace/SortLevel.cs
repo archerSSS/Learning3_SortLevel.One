@@ -34,6 +34,11 @@ namespace SortSpace
         {
             return ACycle(array, 0);
         }
+        
+        public static void InsertSortStep(int[] array, int t, int i)
+        {
+            if (!CCycle(array, t, i)) InsertSortStep(array, t, i);
+        }
 
         /*
          *      Вспомогательные функции.
@@ -58,6 +63,13 @@ namespace SortSpace
             if (i + 1 == array.Length) return true;
             if (Compare(array[i], array[i + 1]) && ExchangeElements(array, i, i + 1)) return BCycle(array, i + 1) && false;
             return BCycle(array, i + 1);
+        }
+
+        public static bool CCycle(int[] array, int t, int i)
+        {
+            if (i + t >= array.Length) return true;
+            if (Compare(array[i], array[i + t]) && ExchangeElements(array, i, i + t)) return CCycle(array, t, i + t) && false;
+            return CCycle(array, t, i + t);
         }
 
         // Сравнение двух целочисленных значений.

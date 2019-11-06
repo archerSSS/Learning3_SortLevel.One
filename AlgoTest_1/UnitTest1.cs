@@ -215,5 +215,27 @@ namespace AlgoTest_1
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
         }
+
+        [TestMethod]
+        public void TestInsert_1()
+        {
+            int[] array = new int[] { 1, 3, 5, 2, 8 };
+            int[] expay = new int[] { 1, 2, 5, 3, 8 };
+
+            SortLevel.InsertSortStep(array, 2, 1);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsert_2()
+        {
+            int[] array = new int[] { 6, 3, 5, 2, 8, 4, 1 };
+            int[] expay = new int[] { 1, 3, 5, 2, 8, 4, 6 };
+
+            SortLevel.InsertSortStep(array, 3, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
     }
 }
