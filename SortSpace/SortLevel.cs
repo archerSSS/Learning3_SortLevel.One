@@ -39,7 +39,7 @@ namespace SortSpace
         //      Проходит по элементам находящимся в указанной шаговой разности по ячейкам начиная с ячейки i.
         //          [5, 4, 3, 2, 1] (t = 2, 0)      =>      [3, 4, 1, 2, 5]
         //
-        public static void InsertSortStep(int[] array, int t, int i)
+        public static void InsertSortSingle(int[] array, int t, int i)
         {
             if (t <= 0) return;
             CCycle(array, t, i);
@@ -49,10 +49,10 @@ namespace SortSpace
         //      Проходит по элементам находящимся в указанной шаговой разности по ячейкам начиная с ячейки i.
         //          [5, 4, 3, 2, 1] (t = 2, 0)      =>      [1, 4, 3, 2, 5]
         //
-        public static void InsertSortAll(int[] array, int t, int i)
+        public static void InsertSortStep(int[] array, int t, int i)
         {
             if (t <= 0) return;
-            if (!CCycle(array, t, i)) InsertSortAll(array, t, i);
+            if (!CCycle(array, t, i)) InsertSortStep(array, t, i);
         }
 
         /*
