@@ -217,10 +217,134 @@ namespace AlgoTest_1
         }
 
         [TestMethod]
-        public void TestInsert_1()
+        public void TestInsertAll_1()
         {
             int[] array = new int[] { 1, 3, 5, 2, 8 };
             int[] expay = new int[] { 1, 2, 5, 3, 8 };
+
+            SortLevel.InsertSortAll(array, 2, 1);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_2()
+        {
+            int[] array = new int[] { 6, 3, 5, 2, 8, 4, 1 };
+            int[] expay = new int[] { 1, 3, 5, 2, 8, 4, 6 };
+
+            SortLevel.InsertSortAll(array, 3, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_3()
+        {
+            int[] array = new int[] { 2, 2, 2 };
+            int[] expay = new int[] { 2, 2, 2 };
+
+            SortLevel.InsertSortAll(array, 3, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_4()
+        {
+            int[] array = new int[] { 9, 5, 7, 11, 3, 1, 6 };
+            int[] expay = new int[] { 3, 5, 6, 11, 7, 1, 9 };
+
+            SortLevel.InsertSortAll(array, 2, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_5()
+        {
+            int[] array = new int[] { 4, 3, 2, -1 };
+            int[] expay = new int[] { -1, 2, 3, 4 };
+
+            SortLevel.InsertSortAll(array, 1, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_6()
+        {
+            int[] array = new int[] { 4, 3, 2, -1 };
+            int[] expay = new int[] { 4, 3, 2, -1 };
+
+            SortLevel.InsertSortAll(array, 4, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_7()
+        {
+            int[] array = new int[] { 4, 3, 2, -1 };
+            int[] expay = new int[] { -1, 3, 2, 4 };
+
+            SortLevel.InsertSortAll(array, 3, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_8()
+        {
+            int[] array = new int[] { 1 };
+            int[] expay = new int[] { 1 };
+
+            SortLevel.InsertSortAll(array, 1, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_9()
+        {
+            int[] array = new int[1];
+            int[] expay = new int[1];
+
+            SortLevel.InsertSortAll(array, 1, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+
+            Assert.AreEqual(0, expay[0]);
+            Assert.AreEqual(0, array[0]);
+        }
+
+        [TestMethod]
+        public void TestInsertAll_10()
+        {
+            int[] array = new int[] { 0, 0, 1, 0, 0 };
+            int[] expay = new int[] { 0, 0, 1, 0, 0 };
+
+            SortLevel.InsertSortAll(array, 0, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertStep_1()
+        {
+            int[] array = new int[] { 0, 0, 1, 0, 0 };
+            int[] expay = new int[] { 0, 0, 0, 0, 1 };
+
+            SortLevel.InsertSortStep(array, 1, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestInsertStep_2()
+        {
+            int[] array = new int[] { 2, 4, 1, 3, 7 };
+            int[] expay = new int[] { 2, 3, 1, 4, 7 };
 
             SortLevel.InsertSortStep(array, 2, 1);
             for (int i = 0; i < array.Length; i++)
@@ -228,32 +352,10 @@ namespace AlgoTest_1
         }
 
         [TestMethod]
-        public void TestInsert_2()
+        public void TestInsertStep_3()
         {
-            int[] array = new int[] { 6, 3, 5, 2, 8, 4, 1 };
-            int[] expay = new int[] { 1, 3, 5, 2, 8, 4, 6 };
-
-            SortLevel.InsertSortStep(array, 3, 0);
-            for (int i = 0; i < array.Length; i++)
-                Assert.AreEqual(expay[i], array[i]);
-        }
-
-        [TestMethod]
-        public void TestInsert_3()
-        {
-            int[] array = new int[] { 2, 2, 2 };
-            int[] expay = new int[] { 2, 2, 2 };
-
-            SortLevel.InsertSortStep(array, 3, 0);
-            for (int i = 0; i < array.Length; i++)
-                Assert.AreEqual(expay[i], array[i]);
-        }
-
-        [TestMethod]
-        public void TestInsert_4()
-        {
-            int[] array = new int[] { 9, 5, 7, 11, 3, 1, 6 };
-            int[] expay = new int[] { 3, 5, 6, 11, 7, 1, 9 };
+            int[] array = new int[] { 8, 4, 5, 11, 2, 1 };
+            int[] expay = new int[] { 5, 4, 2, 11, 8, 1 };
 
             SortLevel.InsertSortStep(array, 2, 0);
             for (int i = 0; i < array.Length; i++)
@@ -261,75 +363,14 @@ namespace AlgoTest_1
         }
 
         [TestMethod]
-        public void TestInsert_5()
+        public void TestInsertStep_4()
         {
-            int[] array = new int[] { 4, 3, 2, -1 };
-            int[] expay = new int[] { -1, 2, 3, 4 };
+            int[] array = new int[] { 5, 4, 3, 2, 1 };
+            int[] expay = new int[] { 4, 3, 2, 1, 5 };
 
             SortLevel.InsertSortStep(array, 1, 0);
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
-        }
-
-        [TestMethod]
-        public void TestInsert_6()
-        {
-            int[] array = new int[] { 4, 3, 2, -1 };
-            int[] expay = new int[] { 4, 3, 2, -1 };
-
-            SortLevel.InsertSortStep(array, 4, 0);
-            for (int i = 0; i < array.Length; i++)
-                Assert.AreEqual(expay[i], array[i]);
-        }
-
-        [TestMethod]
-        public void TestInsert_7()
-        {
-            int[] array = new int[] { 4, 3, 2, -1 };
-            int[] expay = new int[] { -1, 3, 2, 4 };
-
-            SortLevel.InsertSortStep(array, 3, 0);
-            for (int i = 0; i < array.Length; i++)
-                Assert.AreEqual(expay[i], array[i]);
-        }
-
-        [TestMethod]
-        public void TestInsert_8()
-        {
-            int[] array = new int[] { 1 };
-            int[] expay = new int[] { 1 };
-
-            SortLevel.InsertSortStep(array, 1, 0);
-            for (int i = 0; i < array.Length; i++)
-                Assert.AreEqual(expay[i], array[i]);
-        }
-
-        [TestMethod]
-        public void TestInsert_9()
-        {
-            int[] array = new int[1];
-            int[] expay = new int[1];
-
-            SortLevel.InsertSortStep(array, 1, 0);
-            for (int i = 0; i < array.Length; i++)
-                Assert.AreEqual(expay[i], array[i]);
-
-            Assert.AreEqual(0, expay[0]);
-            Assert.AreEqual(0, array[0]);
-        }
-
-        [TestMethod]
-        public void TestInsert_10()
-        {
-            int[] array = new int[] { 0, 0, 1, 0, 0 };
-            int[] expay = new int[] { 0, 0, 1, 0, 0 };
-
-            SortLevel.InsertSortStep(array, 0, 0);
-            for (int i = 0; i < array.Length; i++)
-                Assert.AreEqual(expay[i], array[i]);
-
-            Assert.AreEqual(0, expay[0]);
-            Assert.AreEqual(0, array[0]);
         }
     }
 }
