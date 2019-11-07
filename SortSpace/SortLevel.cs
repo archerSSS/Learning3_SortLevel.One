@@ -37,6 +37,7 @@ namespace SortSpace
         
         public static void InsertSortStep(int[] array, int t, int i)
         {
+            if (t <= 0) return; 
             if (!CCycle(array, t, i)) InsertSortStep(array, t, i);
         }
 
