@@ -6,7 +6,7 @@ namespace SortSpace
     public static class SortLevel
     {
         /*
-         *      Основные функции.
+         *      // Основные функции. //
          */
         // Сортировка выбором.
         //
@@ -55,9 +55,50 @@ namespace SortSpace
             if (!CCycle(array, t, i)) InsertSortStep(array, t, i);
         }
 
+        // Сортировка Шелла.
+        //      Проходит по элементам массива в последовательности Кнута
+        //
+        public static void ShellSort(int[] array)
+        {
+            foreach (int s in KnuthSequence(array.Length))
+                for (int i = 0; i < s; i++) InsertSortStep(array, s, i);
+        }
+
+        // Создает лист числовых значений в порядке убывания последовательностью Кнута
+        //
+        public static List<int> KnuthSequence(int array_size)
+        {
+            List<int> list = new List<int>();
+            int t = KnuthNextStep(1, array_size);
+            for (; t >= 1; t = CalculateKnuthPrestep(t))
+                list.Add(t);
+            return list;
+        }
+
+
         /*
-         *      Вспомогательные функции.
+         *      // Вспомогательные функции. //
          */
+        // Вычисляет максимальный размер шага доступный для 
+        //      данного размера массива s, в соответствии с последовательностью Кнута
+        //
+        public static int KnuthNextStep(int t, int s)
+        {
+            if (CalculateKnuthStep(t) > s) return t;
+            t = CalculateKnuthStep(t);
+            return KnuthNextStep(t, s);
+        }
+
+        public static int CalculateKnuthStep(int t)
+        {
+            return 3 * t + 1;
+        }
+
+        public static int CalculateKnuthPrestep(int t)
+        {
+            return (t - 1) / 3;
+        }
+        
         // Цикл обхода по всему массиву, сортируя все элементы в порядке возрастания.
         //      Возвращает true если сортировка не происходила;
         //          false если был произведен хотя бы один обмен элементов между двумя ячейками.

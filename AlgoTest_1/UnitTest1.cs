@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using SortSpace;
 
 namespace AlgoTest_1
@@ -380,6 +381,136 @@ namespace AlgoTest_1
             int[] expay = new int[] { 2, 1, 3, 4, 5 };
 
             SortLevel.InsertSortSingle(array, 1, 0);
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestKnuth_1()
+        {
+            int[] array = new int[] { 1 };
+            int[] expay = new int[] { 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_2()
+        {
+            int[] array = new int[] { 3, 2, 1, 5, 4 };
+            int[] expay = new int[] { 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_3()
+        {
+            int[] array = new int[] { 3, 2, 1, 5, 4, 1, 56, 2, 5, 6, 4, 3, 11, 20, 42 };
+            int[] expay = new int[] { 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_4()
+        {
+            int[] array = new int[72];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 40, 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_5()
+        {
+            int[] array = new int[120];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 40, 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_6()
+        {
+            int[] array = new int[121];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 121, 40, 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_7()
+        {
+            int[] array = new int[405];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 364, 121, 40, 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestShellSort_1()
+        {
+            int[] array = new int[] { 12, 8, 17, 13, 10, 16, 15, 2, 5, 1, 4, 6, 14, 7, 11, 9, 3 };
+            SortLevel.ShellSort(array);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(i + 1, array[i]);
+        }
+
+        [TestMethod]
+        public void TestShellSort_2()
+        {
+            int[] array = new int[] { 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 35, 34, 33, 32, 31, 17, 16, 15, 14, 13, 12, 11, 10, 30, 29, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 };
+            SortLevel.ShellSort(array);
+
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
         }
