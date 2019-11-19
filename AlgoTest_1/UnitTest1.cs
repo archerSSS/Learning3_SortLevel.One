@@ -495,6 +495,118 @@ namespace AlgoTest_1
         }
 
         [TestMethod]
+        public void TestKnuth_8()
+        {
+            int[] array = new int[3];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_9()
+        {
+            int[] array = new int[4];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_10()
+        {
+            int[] array = new int[12];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_11()
+        {
+            int[] array = new int[13];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_12()
+        {
+            int[] array = new int[20];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_13()
+        {
+            int[] array = new int[40];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 40, 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
+        public void TestKnuth_14()
+        {
+            int[] array = new int[45];
+            for (int i = 0; i < array.Length; i++) array[i] = i;
+            int[] expay = new int[] { 40, 13, 4, 1 };
+
+            int count = 0;
+            List<int> list = SortLevel.KnuthSequence(array.Length);
+            foreach (Int32 n in list)
+            {
+                Assert.AreEqual(expay[count], n);
+                count++;
+            }
+        }
+
+        [TestMethod]
         public void TestShellSort_1()
         {
             int[] array = new int[] { 12, 8, 17, 13, 10, 16, 15, 2, 5, 1, 4, 6, 14, 7, 11, 9, 3 };
@@ -510,6 +622,94 @@ namespace AlgoTest_1
             int[] array = new int[] { 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 35, 34, 33, 32, 31, 17, 16, 15, 14, 13, 12, 11, 10, 30, 29, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
             int[] expay = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 };
             SortLevel.ShellSort(array);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestShellSort_3()
+        {
+            int[] array = new int[] { 3, 2, 1 };
+            int[] expay = new int[] { 1, 2, 3 };
+            SortLevel.ShellSort(array);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestShellSort_4()
+        {
+            int[] array = new int[] { 5, 4, 3, 2, 1 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5 };
+            SortLevel.ShellSort(array);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestShellSort_5()
+        {
+            int[] array = new int[] { 5, 4, 3, 2, 1 };
+            int[] expay = new int[] { 0, 33, 11, 7, 9 };
+            SortLevel.ShellSort(array);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.IsTrue(expay[i] != array[i]);
+        }
+
+        [TestMethod]
+        public void TestArrayChunk_1()
+        {
+            int[] array = new int[] { 7, 5, 6, 4, 3, 1, 2 };
+            int[] expay = new int[] { 2, 1, 3, 4, 6, 5, 7 };
+            Assert.AreEqual(3, SortLevel.ArrayChunk(array));
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestArrayChunk_2()
+        {
+            int[] array = new int[] { 4, 3, 9, 1, 2 };
+            int[] expay = new int[] { 4, 2, 3, 1, 9 };
+            Assert.AreEqual(4, SortLevel.ArrayChunk(array));
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestArrayChunk_3()
+        {
+            int[] array = new int[] { 9, 6, 8, 7, 5, 4, 1, 2, 3 };
+            int[] expay = new int[] { 3, 2, 1, 4, 5, 7, 8, 6, 9 };
+            Assert.AreEqual(4, SortLevel.ArrayChunk(array));
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestArrayChunk_4()
+        {
+            int[] array = new int[] { 9, 6, 8, 7, 5, 4, 1, 2 };
+            int[] expay = new int[] { 2, 4, 1, 5, 7, 8, 6, 9 };
+            Assert.AreEqual(3, SortLevel.ArrayChunk(array));
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestArrayChunk_5()
+        {
+            int[] array = new int[] { 7, 4, 9, 1, 6, 10 };
+            int[] expay = new int[] { 1, 4, 9, 6, 7, 10 };
+            Assert.AreEqual(0, SortLevel.ArrayChunk(array));
 
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);

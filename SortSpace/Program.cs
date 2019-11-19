@@ -10,7 +10,7 @@ namespace SortSpace
     {
         public static void Main(string[] args)
         {
-            
+            //SortLevel.Fu2(1,6);
         }
     }
 }

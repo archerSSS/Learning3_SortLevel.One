@@ -75,6 +75,13 @@ namespace SortSpace
             return list;
         }
 
+        // Алгоритм разбиения
+        //
+        public static int ArrayChunk(int[] M)
+        {
+            return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
+        }
+
 
         /*
          *      // Вспомогательные функции. //
@@ -146,6 +153,35 @@ namespace SortSpace
             return minor;
         }
 
+        // Алгоритм разбиения 2
+        //
+        public static int ArrayChunkA(int[] M, int N, int n, int i1, int i2)
+        {
+            if (IsLess(M[i1], N)) i1++;
+            if (IsBigger(M[i2], N)) i2--;
+            if (i1 == i2 - 1 && M[i1] > M[i2] && ExchangeElements(M, i1, i2)) return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
+            if (i1 == i2 || (i1 == i2 - 1 && M[i1] < M[i2])) return n;
+            if (ExchangeElements(M, i1, i2)) n = PivotUpdateIndex(n, i1, i2);
+            return ArrayChunkA(M, N, n, i1, i2);
+        }
+
+        public static bool IsLess(int i, int n)
+        {
+            return i < n;
+        }
+
+        public static bool IsBigger(int i, int n)
+        {
+            return i > n;
+        }
+
+        public static int PivotUpdateIndex(int n, int i1, int i2)
+        {
+            if (i1 == n) return i2;
+            else if (i2 == n) return i1;
+            else return n;
+        }
+        
         // Меняет два элемента массива местами.
         //
         public static bool ExchangeElements(int[] array, int i, int j)
