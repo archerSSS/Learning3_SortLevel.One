@@ -161,20 +161,21 @@ namespace SortSpace
             //      и первый элемент больше другого
             if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
                 return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
-
+            
             // Если индексы равны либо 
             //      один индекс больше другого на 1 и 
             //          значение первого элемента меньше второго
             if (IsEquivalents(i1, i2) || (IsStick(i1, i2) && IsLess(M[i1], M[i2])))
                 return n;
 
-            if (IsLess(M[i1], N))
-                return ArrayChunkA(M, N, n, ++i1, i2);
-            if (IsBigger(M[i2], N))
-                return ArrayChunkA(M, N, n, i1, --i2);
-            
-            if (ExchangeElements(M, i1, i2))
-                n = PivotUpdateIndex(n, i1, i2);
+            while (M[i1] < N || M[i2] > N)
+            {
+                if (M[i1] < N) i1++;
+                if (M[i2] > N) i2--;
+            }
+
+            if (!IsStick(i1, i2)) ExchangeElements(M, i1, i2);
+            n = PivotUpdateIndex(n, i1, i2);
 
             return ArrayChunkA(M, N, n, i1, i2);
         }
@@ -218,6 +219,7 @@ namespace SortSpace
         //
         public static bool ExchangeElements(int[] array, int i, int j)
         {
+            if (i == j) return true; 
             array[i] += array[j];
             array[j] = array[i] - array[j];
             array[i] = array[i] - array[j];
