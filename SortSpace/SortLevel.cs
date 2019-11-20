@@ -153,26 +153,58 @@ namespace SortSpace
             return minor;
         }
 
-        // Алгоритм разбиения 2
+        // Алгоритм разбиения 2-я ступень
         //
         public static int ArrayChunkA(int[] M, int N, int n, int i1, int i2)
         {
-            if (IsLess(M[i1], N)) i1++;
-            if (IsBigger(M[i2], N)) i2--;
-            if (i1 == i2 - 1 && M[i1] > M[i2] && ExchangeElements(M, i1, i2)) return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
-            if (i1 == i2 || (i1 == i2 - 1 && M[i1] < M[i2])) return n;
-            if (ExchangeElements(M, i1, i2)) n = PivotUpdateIndex(n, i1, i2);
+            //  Если разница индексов в 1
+            //      и первый элемент больше другого
+            if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
+                return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
+
+            // Если индексы равны либо 
+            //      один индекс больше другого на 1 и 
+            //          значение первого элемента меньше второго
+            if (IsEquivalents(i1, i2) || (IsStick(i1, i2) && IsLess(M[i1], M[i2])))
+                return n;
+
+            if (IsLess(M[i1], N))
+                return ArrayChunkA(M, N, n, ++i1, i2);
+            if (IsBigger(M[i2], N))
+                return ArrayChunkA(M, N, n, i1, --i2);
+            
+            if (ExchangeElements(M, i1, i2))
+                n = PivotUpdateIndex(n, i1, i2);
+
             return ArrayChunkA(M, N, n, i1, i2);
         }
 
+        // true Если значение меньше другого
+        //
         public static bool IsLess(int i, int n)
         {
             return i < n;
         }
 
+        // true Если значение больше другого
+        //
         public static bool IsBigger(int i, int n)
         {
             return i > n;
+        }
+
+        // true если у значений разница в 1
+        //
+        public static bool IsStick(int a, int b)
+        {
+            return a == b - 1;
+        }
+
+        // true если значения равны
+        //
+        public static bool IsEquivalents(int a, int b)
+        {
+            return a == b;
         }
 
         public static int PivotUpdateIndex(int n, int i1, int i2)

@@ -675,7 +675,7 @@ namespace AlgoTest_1
         public void TestArrayChunk_2()
         {
             int[] array = new int[] { 4, 3, 9, 1, 2 };
-            int[] expay = new int[] { 4, 2, 3, 1, 9 };
+            int[] expay = new int[] { 4, 3, 2, 1, 9 };
             Assert.AreEqual(4, SortLevel.ArrayChunk(array));
 
             for (int i = 0; i < array.Length; i++)
@@ -697,8 +697,8 @@ namespace AlgoTest_1
         public void TestArrayChunk_4()
         {
             int[] array = new int[] { 9, 6, 8, 7, 5, 4, 1, 2 };
-            int[] expay = new int[] { 2, 4, 1, 5, 7, 8, 6, 9 };
-            Assert.AreEqual(3, SortLevel.ArrayChunk(array));
+            int[] expay = new int[] { 2, 1, 4, 5, 6, 7, 8, 9 }; // 6 i=4
+            Assert.AreEqual(4, SortLevel.ArrayChunk(array));
 
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
@@ -708,8 +708,19 @@ namespace AlgoTest_1
         public void TestArrayChunk_5()
         {
             int[] array = new int[] { 7, 4, 9, 1, 6, 10 };
-            int[] expay = new int[] { 1, 4, 9, 6, 7, 10 };
+            int[] expay = new int[] { 1, 4, 9, 7, 6, 10 };
             Assert.AreEqual(0, SortLevel.ArrayChunk(array));
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+        
+        [TestMethod]
+        public void TestArrayChunk_6()
+        {
+            int[] array = new int[] { 1, 3, 4, 6, 5, 2, 8 };
+            int[] expay = new int[] { 1, 3, 4, 2, 5, 6, 8 };
+            Assert.AreEqual(5, SortLevel.ArrayChunk(array));
 
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
