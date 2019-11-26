@@ -82,6 +82,14 @@ namespace SortSpace
             return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
         }
 
+        public static void QuickSort(int[] array, int left, int right)
+        {
+            if (left == right || left == right - 1) return;
+            int n = ArrayChunkA(array, array[(left + right + 1) / 2], (left + right + 1) / 2, left, right);
+            if(!(n <= left)) QuickSort(array, left, n - 1);
+            if (!(n >= right)) QuickSort(array, n + 1, right);
+        }
+
 
         /*
          *      // Вспомогательные функции. //

@@ -725,5 +725,38 @@ namespace AlgoTest_1
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
         }
+
+        [TestMethod]
+        public void TestQuickSort_1()
+        {
+            int[] array = new int[] { 1, 3, 4, 6, 5, 2, 8 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5, 6, 8 };
+            SortLevel.QuickSort(array, 0, 6);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_2()
+        {
+            int[] array = new int[] { 4, 2, 7, 1, 8, 5 };
+            int[] expay = new int[] { 1, 2, 4, 5, 7, 8 };
+            SortLevel.QuickSort(array, 0, 5);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_3()
+        {
+            int[] array = new int[] { 4, 2, 7, 1, 8, 5 };
+            int[] expay = new int[] { 4, 2, 7, 1, 5, 8 };
+            SortLevel.QuickSort(array, 3, 5);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
     }
 }
