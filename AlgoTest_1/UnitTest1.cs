@@ -758,5 +758,137 @@ namespace AlgoTest_1
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
         }
+
+        [TestMethod]
+        public void TestQuickSort_4()
+        {
+            int[] array = new int[] { 4, 2, 7, 1, 8, 5 };
+            int[] expay = new int[] { 2, 4, 7, 1, 8, 5 };
+            SortLevel.QuickSort(array, 0, 2);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_5()
+        {
+            int[] array = new int[] { 4, 2, 7, 1, 8, 5 };
+            int[] expay = new int[] { 4, 1, 2, 7, 8, 5 };
+            SortLevel.QuickSort(array, 1, 4);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_6()
+        {
+            int[] array = new int[] { 4, 2, 7, 1, 8, 5, 3, 9, 15, 11, 13, 12, 14 };
+            int[] expay = new int[] { 4, 2, 7, 1, 8, 5, 3, 9, 11, 12, 13, 14, 15 };
+            SortLevel.QuickSort(array, 6, 12);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_7()
+        {
+            int[] array = new int[] { 4, 2, 7, 1, 8, 5, 3, 9, 15, 11, 13, 12, 14 };
+            int[] expay = new int[] { 4, 2, 7, 1, 3, 5, 8, 9, 15, 11, 13, 12, 14 };
+            SortLevel.QuickSort(array, 3, 8);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_8()
+        {
+            int[] array = new int[] { 4, 2, 7, 1, 8, 5, 3, 9, 15, 11, 13, 12, 14 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5, 7, 8, 9, 15, 11, 13, 12, 14 };
+            SortLevel.QuickSort(array, 0, 8);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_9()
+        {
+            int[] array = new int[] { 2, 3, 1 };
+            int[] expay = new int[] { 1, 2, 3 };
+            SortLevel.QuickSort(array, 0, 2);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_10()
+        {
+            int[] array = new int[] { 3, 2, 1 };
+            int[] expay = new int[] { 1, 2, 3 };
+            SortLevel.QuickSort(array, 0, 2);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_11()
+        {
+            int[] array = new int[] { 3, 2, 1, 0 };
+            int[] expay = new int[] { 0, 1, 2, 3 };
+            SortLevel.QuickSort(array, 0, 3);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_12()
+        {
+            int[] array = new int[] { 3, 0, 1, 2 };
+            int[] expay = new int[] { 0, 1, 2, 3 };
+            SortLevel.QuickSort(array, 0, 3);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_13()
+        {
+            int[] array = new int[] { 0, 3, 2, 1 };
+            int[] expay = new int[] { 0, 1, 2, 3 };
+            SortLevel.QuickSort(array, 0, 3);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_14()
+        {
+            int[] array = new int[] { 2, 1 };
+            int[] expay = new int[] { 1, 2 };
+            SortLevel.QuickSort(array, 0, 1);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_15()
+        {
+            int[] array = new int[] { 2, 1, 3 };
+            int[] expay = new int[] { 1, 2, 3 };
+            SortLevel.QuickSort(array, 0, 2);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
     }
 }

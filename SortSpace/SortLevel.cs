@@ -79,13 +79,14 @@ namespace SortSpace
         //
         public static int ArrayChunk(int[] M)
         {
-            return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
+            return ArrayChunkA(M, 0, M.Length - 1);
+            //return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
         }
 
         public static void QuickSort(int[] array, int left, int right)
         {
-            if (left == right || left == right - 1) return;
-            int n = ArrayChunkA(array, array[(left + right + 1) / 2], (left + right + 1) / 2, left, right);
+            if (left == right) return;
+            int n = ArrayChunkA(array, left, right);
             if(!(n <= left)) QuickSort(array, left, n - 1);
             if (!(n >= right)) QuickSort(array, n + 1, right);
         }
@@ -163,12 +164,23 @@ namespace SortSpace
 
         // Алгоритм разбиения 2-я ступень
         //
-        public static int ArrayChunkA(int[] M, int N, int n, int i1, int i2)
+        public static int ArrayChunkA(int[] M, int i1, int i2)
+        {
+            while (true)
+            {
+                int n = ArrayChunkB(M, M[(i1 + i2 + 1) / 2], (i1 + i2 + 1) / 2, i1, i2);
+                if (n > -1) return n;
+            }
+        }
+
+        // Алгоритм разбиения 3-я ступень
+        //
+        public static int ArrayChunkB(int[] M, int N, int n, int i1, int i2)
         {
             //  Если разница индексов в 1
             //      и первый элемент больше другого
             if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
-                return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
+                return -1;
             
             // Если индексы равны либо 
             //      один индекс больше другого на 1 и 
@@ -182,10 +194,14 @@ namespace SortSpace
                 if (M[i2] > N) i2--;
             }
 
-            if (!IsStick(i1, i2)) ExchangeElements(M, i1, i2);
-            n = PivotUpdateIndex(n, i1, i2);
+            if (!IsStick(i1, i2))
+            {
+                ExchangeElements(M, i1, i2);
+                n = PivotUpdateIndex(n, i1, i2);
+            }
+            
 
-            return ArrayChunkA(M, N, n, i1, i2);
+            return ArrayChunkB(M, N, n, i1, i2);
         }
 
         // true Если значение меньше другого
