@@ -75,20 +75,31 @@ namespace SortSpace
             return list;
         }
 
-        // Алгоритм разбиения
+        // Алгоритм разбиения для быстрой сортировки
         //
         public static int ArrayChunk(int[] M)
         {
             return ArrayChunkA(M, 0, M.Length - 1);
-            //return ArrayChunkA(M, M[M.Length / 2], M.Length / 2, 0, M.Length - 1);
         }
 
+        // Алгоритм быстрой сортировки массива
+        //
         public static void QuickSort(int[] array, int left, int right)
         {
             if (left == right) return;
             int n = ArrayChunkA(array, left, right);
             if(!(n <= left)) QuickSort(array, left, n - 1);
             if (!(n >= right)) QuickSort(array, n + 1, right);
+        }
+
+        // Алгоритм быстрой сортировки с хвостовой рекурсией
+        //
+        public static void QuickSortTailOptimization(int[] array, int left, int right)
+        {
+            if (left == right) return;
+            int i = ArrayLomutoA(array, left, right);
+            //if (i == -1) return;
+            QuickSortTailOptimization(array, left, right - 1);
         }
 
 
@@ -162,7 +173,7 @@ namespace SortSpace
             return minor;
         }
 
-        // Алгоритм разбиения 2-я ступень
+        // Алгоритм разбиения 1-я ступень
         //
         public static int ArrayChunkA(int[] M, int i1, int i2)
         {
@@ -173,18 +184,13 @@ namespace SortSpace
             }
         }
 
-        // Алгоритм разбиения 3-я ступень
+        // Алгоритм разбиения 2-я ступень
         //
         public static int ArrayChunkB(int[] M, int N, int n, int i1, int i2)
         {
-            //  Если разница индексов в 1
-            //      и первый элемент больше другого
             if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
                 return -1;
             
-            // Если индексы равны либо 
-            //      один индекс больше другого на 1 и 
-            //          значение первого элемента меньше второго
             if (IsEquivalents(i1, i2) || (IsStick(i1, i2) && IsLess(M[i1], M[i2])))
                 return n;
 
@@ -199,10 +205,40 @@ namespace SortSpace
                 ExchangeElements(M, i1, i2);
                 n = PivotUpdateIndex(n, i1, i2);
             }
-            
-
             return ArrayChunkB(M, N, n, i1, i2);
         }
+
+        // Алгоритм разбиения Lomuto 1-я ступень
+        //
+        public static int ArrayLomutoA(int[] M, int i1, int i2)
+        {
+            return ArrayLomutoB(M, M[i2], i1, i2);
+        }
+
+        // Алгоритм разбиения Lomuto 2-я ступень
+        //
+        public static int ArrayLomutoB(int[] M, int N, int i1, int i2)
+        {
+            if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
+                return 0;
+
+            if (IsEquivalents(i1, i2) || (IsStick(i1, i2) && IsLess(M[i1], M[i2])))
+                return 1;
+
+            while (M[i1] < N)
+            {
+                //if (M[i1] > M[i1 + 1]) n = 0;
+                i1++;
+            }
+
+            if (!IsStick(i1, i2))
+            {
+                ExchangeElements(M, i1, i2);
+                N = M[i2];
+            }
+            return ArrayLomutoB(M, N, i1, i2);
+        }
+        
 
         // true Если значение меньше другого
         //

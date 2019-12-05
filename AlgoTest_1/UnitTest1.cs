@@ -890,5 +890,162 @@ namespace AlgoTest_1
             for (int i = 0; i < array.Length; i++)
                 Assert.AreEqual(expay[i], array[i]);
         }
+
+        [TestMethod]
+        public void TestQuickSort_16()
+        {
+            int[] array = new int[] { 1 };
+            int[] expay = new int[] { 1 };
+            SortLevel.QuickSort(array, 0, 0);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_17()
+        {
+            int[] array = new int[] { 1, 2 };
+            int[] expay = new int[] { 1, 2 };
+            SortLevel.QuickSort(array, 0, 1);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSort_18()
+        {
+            int[] array = new int[5000];
+            int[] expay = new int[5000];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i > 2500)
+                {
+                    array[i] = i;
+                    expay[i] = i;
+                }
+                else
+                {
+                    array[i] = 2500 - i;
+                    expay[i] = i;
+                }
+            }
+            SortLevel.QuickSort(array, 0, 4999);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_1()
+        {
+            int[] array = new int[] { 1, 2, 3, 4 };
+            int[] expay = new int[] { 1, 2, 3, 4 };
+            SortLevel.QuickSortTailOptimization(array, 0, 3);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_2()
+        {
+            int[] array = new int[] { 1, 3, 2, 4 };
+            int[] expay = new int[] { 1, 2, 3, 4 };
+            SortLevel.QuickSortTailOptimization(array, 0, 3);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_3()
+        {
+            int[] array = new int[] { 8, 2, 3, 1 };
+            int[] expay = new int[] { 1, 2, 3, 8 };
+            SortLevel.QuickSortTailOptimization(array, 0, 3);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_4()
+        {
+            int[] array = new int[] { 7, 4, 1, 5, 2 };
+            int[] expay = new int[] { 1, 4, 5, 7, 2 };
+            SortLevel.QuickSortTailOptimization(array, 0, 3);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_5()
+        {
+            int[] array = new int[] { 7, 4, 1, 5, 2 };
+            int[] expay = new int[] { 7, 1, 2, 4, 5 };
+            SortLevel.QuickSortTailOptimization(array, 1, 4);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_6()
+        {
+            int[] array = new int[50];
+            int[] expay = new int[50];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = 150 - i;
+                expay[i] = 101 + i;
+            }
+            SortLevel.QuickSortTailOptimization(array, 0, 49);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_7()
+        {
+            int[] array = new int[500];
+            int[] expay = new int[500];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = 1500 - i;
+                expay[i] = 1001 + i;
+            }
+            SortLevel.QuickSortTailOptimization(array, 0, 499);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestQuickSortTailOptimization_8()
+        {
+            int[] array = new int[5000];
+            int[] expay = new int[5000];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i > 2500)
+                {
+                    array[i] = i;
+                    expay[i] = i;
+                }
+                else
+                {
+                    array[i] = 2500 - i;
+                    expay[i] = i;
+                }
+            }
+            SortLevel.QuickSortTailOptimization(array, 0, 4999);
+
+            for (int i = 0; i < array.Length; i++)
+                Assert.AreEqual(expay[i], array[i]);
+        }
     }
 }
