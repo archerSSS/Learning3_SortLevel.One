@@ -97,7 +97,7 @@ namespace SortSpace
         public static void QuickSortTailOptimization(int[] array, int left, int right)
         {
             if (left == right) return;
-            int i = ArrayLomutoA(array, left, right);
+            int i = ArrayChunkC(array, left, right);
             //if (i == -1) return;
             QuickSortTailOptimization(array, left, right - 1);
         }
@@ -210,14 +210,14 @@ namespace SortSpace
 
         // Алгоритм разбиения Lomuto 1-я ступень
         //
-        public static int ArrayLomutoA(int[] M, int i1, int i2)
+        public static int ArrayChunkC(int[] M, int i1, int i2)
         {
-            return ArrayLomutoB(M, M[i2], i1, i2);
+            return ArrayChunkD(M, M[i2], i1, i2);
         }
 
         // Алгоритм разбиения Lomuto 2-я ступень
         //
-        public static int ArrayLomutoB(int[] M, int N, int i1, int i2)
+        public static int ArrayChunkD(int[] M, int N, int i1, int i2)
         {
             if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
                 return 0;
@@ -236,9 +236,43 @@ namespace SortSpace
                 ExchangeElements(M, i1, i2);
                 N = M[i2];
             }
-            return ArrayLomutoB(M, N, i1, i2);
+            return ArrayChunkD(M, N, i1, i2);
         }
-        
+
+        public static int ArrayLomuto(int[] M, int N, int i1, int i2, int p)
+        {
+            if (IsStick(i2, p) && IsBigger(M[i2], M[p]) && ExchangeElements(M, i2, p))
+            {
+                ShiftFromTo(M, p, i1);
+                return 0;
+            }
+                
+
+            if (IsEquivalents(i1, p) || (IsStick(i1, p) && IsLess(M[i1], M[p])))
+                return 1;
+
+            while (M[i1] > N)
+            {
+                i1++;
+            }
+
+            if (!IsStick(i2, p) && i2 != 0)
+            {
+                ExchangeElements(M, i2, i2 - 1);
+                i1 = i2 - 1;
+            }
+            return ArrayChunkD(M, N, i1, p);
+        }
+
+        public static void ShiftFromTo(int[] array, int i1, int i2)
+        {
+            while (i1 != i2)
+            {
+                ExchangeElements(array, i2 - 1, i2);
+                i2--;
+            }
+        }
+
 
         // true Если значение меньше другого
         //
