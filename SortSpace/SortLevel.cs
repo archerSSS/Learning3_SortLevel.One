@@ -97,8 +97,8 @@ namespace SortSpace
         public static void QuickSortTailOptimization(int[] array, int left, int right)
         {
             if (left == right) return;
-            int i = ArrayChunkC(array, left, right);
-            //if (i == -1) return;
+            //QuickSortTailOptimization(array, left, right - ArrayLomuto(array, left, left, right));
+            AL(array, left, right, array[right]);
             QuickSortTailOptimization(array, left, right - 1);
         }
 
@@ -179,14 +179,14 @@ namespace SortSpace
         {
             while (true)
             {
-                int n = ArrayChunkB(M, M[(i1 + i2 + 1) / 2], (i1 + i2 + 1) / 2, i1, i2);
+                int n = ArrayChunkAA(M, M[(i1 + i2 + 1) / 2], (i1 + i2 + 1) / 2, i1, i2);
                 if (n > -1) return n;
             }
         }
-
+        
         // Алгоритм разбиения 2-я ступень
         //
-        public static int ArrayChunkB(int[] M, int N, int n, int i1, int i2)
+        public static int ArrayChunkAA(int[] M, int N, int n, int i1, int i2)
         {
             if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
                 return -1;
@@ -205,72 +205,94 @@ namespace SortSpace
                 ExchangeElements(M, i1, i2);
                 n = PivotUpdateIndex(n, i1, i2);
             }
-            return ArrayChunkB(M, N, n, i1, i2);
+            return ArrayChunkAA(M, N, n, i1, i2);
         }
 
-        // Алгоритм разбиения Lomuto 1-я ступень
+        // Алгоритм сортировки Ломуто
         //
-        public static int ArrayChunkC(int[] M, int i1, int i2)
+        public static int ArrayLomuto(int[] M, int i1, int i2, int p)
         {
-            return ArrayChunkD(M, M[i2], i1, i2);
+            bool b = false;
+            while (true)
+            {
+                if (M[i2] < M[p])
+                {
+                    int u = F(M, i1, i2, p);
+                    if (u != -1)
+                    {
+                        i1 = u;
+                        b = ExchangeElements(M, i1, i2);
+                    }
+                }
+
+                if (i2 == p - 1)
+                {
+                    if (b || M[i1] > M[p])
+                    {
+                        return ShiftFromTo(M, p, i1);
+                    }
+                    if (M[i2] > M[p] && ExchangeElements(M, i2, p)) return 0;
+                    return 1;
+                }
+                i2++;
+            }
         }
 
-        // Алгоритм разбиения Lomuto 2-я ступень
-        //
-        public static int ArrayChunkD(int[] M, int N, int i1, int i2)
-        {
-            if (IsStick(i1, i2) && IsBigger(M[i1], M[i2]) && ExchangeElements(M, i1, i2))
-                return 0;
-
-            if (IsEquivalents(i1, i2) || (IsStick(i1, i2) && IsLess(M[i1], M[i2])))
-                return 1;
-
-            while (M[i1] < N)
-            {
-                //if (M[i1] > M[i1 + 1]) n = 0;
-                i1++;
-            }
-
-            if (!IsStick(i1, i2))
-            {
-                ExchangeElements(M, i1, i2);
-                N = M[i2];
-            }
-            return ArrayChunkD(M, N, i1, i2);
-        }
-
-        public static int ArrayLomuto(int[] M, int N, int i1, int i2, int p)
-        {
-            if (IsStick(i2, p) && IsBigger(M[i2], M[p]) && ExchangeElements(M, i2, p))
-            {
-                ShiftFromTo(M, p, i1);
-                return 0;
-            }
-                
-
-            if (IsEquivalents(i1, p) || (IsStick(i1, p) && IsLess(M[i1], M[p])))
-                return 1;
-
-            while (M[i1] > N)
-            {
-                i1++;
-            }
-
-            if (!IsStick(i2, p) && i2 != 0)
-            {
-                ExchangeElements(M, i2, i2 - 1);
-                i1 = i2 - 1;
-            }
-            return ArrayChunkD(M, N, i1, p);
-        }
-
-        public static void ShiftFromTo(int[] array, int i1, int i2)
+        public static void AL(int[] M, int i1, int i2, int p)
         {
             while (i1 != i2)
             {
-                ExchangeElements(array, i2 - 1, i2);
-                i2--;
+                if (M[i1] > M[i2])
+                {
+                    ExchangeElements(M, i1, i2);
+                }
+                i1++;
             }
+        }
+
+        public static int F(int[] M, int i1, int i2, int p)
+        {
+            while (i1 < i2)
+            {
+                if (M[i1] > M[i2] && M[i1] > M[p])
+                {
+                    return i1;
+                }
+                i1++;
+            }
+            return -1;
+        }
+
+        // Смещение элементов.
+        // p-элемент перемещается в положение i1 + 1, а остальные элементы после i1 смещаются на +1
+        //
+        public static int ShiftFromTo(int[] array, int p, int i1)
+        {
+            /*
+             * if (i1 == p) return p; 
+            while (i1 != p && p > 0)
+            {
+                ExchangeElements(array, p - 1, p);
+                p--;
+            }
+            return 0;
+             */
+
+            if (i1 == p) return 0;
+            int p2 = array[p];
+            for (int i = p; i > i1; i--) array[i] = array[i - 1];
+            array[i1] = p2;
+            return 0;
+        }
+
+        public static int SeekFor(int[] array, int i)
+        {
+            int a = 0;
+            while (a <= i)
+            {
+                if (array[a] > array[i]) return a; 
+            }
+            return a;
         }
 
 
