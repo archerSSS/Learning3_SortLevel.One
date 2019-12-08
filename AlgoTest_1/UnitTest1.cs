@@ -707,7 +707,7 @@ namespace AlgoTest_1
         public void TestArrayChunk_4()
         {
             int[] array = new int[] { 9, 6, 8, 7, 5, 4, 1, 2 };
-            int[] expay = new int[] { 2, 1, 4, 5, 6, 7, 8, 9 }; // 6 i=4
+            int[] expay = new int[] { 2, 1, 4, 5, 6, 7, 8, 9 }; 
             Assert.AreEqual(4, SortLevel.ArrayChunk(array));
 
             for (int i = 0; i < array.Length; i++)

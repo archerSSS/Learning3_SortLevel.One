@@ -97,8 +97,7 @@ namespace SortSpace
         public static void QuickSortTailOptimization(int[] array, int left, int right)
         {
             if (left == right) return;
-            //QuickSortTailOptimization(array, left, right - ArrayLomuto(array, left, left, right));
-            AL(array, left, right, array[right]);
+            ArrayOpti(array, left, right, array[right]);
             QuickSortTailOptimization(array, left, right - 1);
         }
 
@@ -208,37 +207,8 @@ namespace SortSpace
             return ArrayChunkAA(M, N, n, i1, i2);
         }
 
-        // Алгоритм сортировки Ломуто
-        //
-        public static int ArrayLomuto(int[] M, int i1, int i2, int p)
-        {
-            bool b = false;
-            while (true)
-            {
-                if (M[i2] < M[p])
-                {
-                    int u = F(M, i1, i2, p);
-                    if (u != -1)
-                    {
-                        i1 = u;
-                        b = ExchangeElements(M, i1, i2);
-                    }
-                }
 
-                if (i2 == p - 1)
-                {
-                    if (b || M[i1] > M[p])
-                    {
-                        return ShiftFromTo(M, p, i1);
-                    }
-                    if (M[i2] > M[p] && ExchangeElements(M, i2, p)) return 0;
-                    return 1;
-                }
-                i2++;
-            }
-        }
-
-        public static void AL(int[] M, int i1, int i2, int p)
+        public static void ArrayOpti(int[] M, int i1, int i2, int p)
         {
             while (i1 != i2)
             {
@@ -250,40 +220,6 @@ namespace SortSpace
             }
         }
 
-        public static int F(int[] M, int i1, int i2, int p)
-        {
-            while (i1 < i2)
-            {
-                if (M[i1] > M[i2] && M[i1] > M[p])
-                {
-                    return i1;
-                }
-                i1++;
-            }
-            return -1;
-        }
-
-        // Смещение элементов.
-        // p-элемент перемещается в положение i1 + 1, а остальные элементы после i1 смещаются на +1
-        //
-        public static int ShiftFromTo(int[] array, int p, int i1)
-        {
-            /*
-             * if (i1 == p) return p; 
-            while (i1 != p && p > 0)
-            {
-                ExchangeElements(array, p - 1, p);
-                p--;
-            }
-            return 0;
-             */
-
-            if (i1 == p) return 0;
-            int p2 = array[p];
-            for (int i = p; i > i1; i--) array[i] = array[i - 1];
-            array[i1] = p2;
-            return 0;
-        }
 
         public static int SeekFor(int[] array, int i)
         {
