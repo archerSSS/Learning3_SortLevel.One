@@ -97,8 +97,17 @@ namespace SortSpace
         public static void QuickSortTailOptimization(int[] array, int left, int right)
         {
             if (left == right) return;
-            ArrayOpti(array, left, right, array[right]);
-            QuickSortTailOptimization(array, left, right - 1);
+            int n = ArrayChunkA(array, left, right);
+            if (right - n < n - left)
+            {
+                ArrayOpti(array, n, right);
+                QuickSortTailOptimization(array, left, n - 1);
+            }
+            else
+            {
+                ArrayOpti(array, left, n);
+                QuickSortTailOptimization(array, n + 1, right);
+            }
         }
 
 
@@ -207,17 +216,30 @@ namespace SortSpace
             return ArrayChunkAA(M, N, n, i1, i2);
         }
 
-
-        public static void ArrayOpti(int[] M, int i1, int i2, int p)
+        public static int ArrayOpti(int[] M, int i1, int i2)
         {
+            while (i1 != i2)
+            {
+                ArrayOptiA(M, i1, i2);
+                i2--;
+            }
+            return 0;
+        }
+
+        public static int ArrayOptiA(int[] M, int i1, int i2)
+        {
+            int i = -1;
             while (i1 != i2)
             {
                 if (M[i1] > M[i2])
                 {
+                    i = i1;
                     ExchangeElements(M, i1, i2);
                 }
+                else i = -1;
                 i1++;
             }
+            return -1;
         }
 
 
