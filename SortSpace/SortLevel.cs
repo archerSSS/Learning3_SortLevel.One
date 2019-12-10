@@ -97,17 +97,28 @@ namespace SortSpace
         public static void QuickSortTailOptimization(int[] array, int left, int right)
         {
             if (left == right) return;
+
+            // QuickSort алгоритм
             int n = ArrayChunkA(array, left, right);
-            if (right - n < n - left)
+            
+            int i1;
+            int i2;
+            if (right - n < n - left)   { i1 = n; i2 = right; right = n - 1; }
+            else                        { i1 = left; i2 = n; left = n + 1; }
+
+            int temp_left = i1;
+            while (!(i1 >= i2))
             {
-                ArrayOpti(array, n, right);
-                QuickSortTailOptimization(array, left, n - 1);
+                if (array[i1] > array[i2]) ExchangeElements(array, i1, i2);
+                i1++;
+                if (i1 == i2)
+                {
+                    i1 = temp_left;
+                    i2--;
+                }
             }
-            else
-            {
-                ArrayOpti(array, left, n);
-                QuickSortTailOptimization(array, n + 1, right);
-            }
+
+            QuickSortTailOptimization(array, left, right);
         }
 
 
@@ -215,44 +226,7 @@ namespace SortSpace
             }
             return ArrayChunkAA(M, N, n, i1, i2);
         }
-
-        public static int ArrayOpti(int[] M, int i1, int i2)
-        {
-            while (i1 != i2)
-            {
-                ArrayOptiA(M, i1, i2);
-                i2--;
-            }
-            return 0;
-        }
-
-        public static int ArrayOptiA(int[] M, int i1, int i2)
-        {
-            int i = -1;
-            while (i1 != i2)
-            {
-                if (M[i1] > M[i2])
-                {
-                    i = i1;
-                    ExchangeElements(M, i1, i2);
-                }
-                else i = -1;
-                i1++;
-            }
-            return -1;
-        }
-
-
-        public static int SeekFor(int[] array, int i)
-        {
-            int a = 0;
-            while (a <= i)
-            {
-                if (array[a] > array[i]) return a; 
-            }
-            return a;
-        }
-
+        
 
         // true Если значение меньше другого
         //
