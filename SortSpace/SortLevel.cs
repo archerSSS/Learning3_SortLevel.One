@@ -121,6 +121,24 @@ namespace SortSpace
             QuickSortTailOptimization(array, left, right);
         }
 
+        public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
+        {
+            int[] medians = new int[(R - L - 1) / 5 + 1];
+            int m = 0;
+
+            for (int i = L; i < R; i += 5)
+            {
+                QuickSortTailOptimization(array, i, i + 5);
+                medians[m++] = i + 2;
+            }
+
+            QuickSortTailOptimization(medians, 0, medians.Length - 1);
+            int s = medians[medians.Length / 2];
+            
+
+            return new List<int>();
+        }
+
 
         /*
          *      // Вспомогательные функции. //
@@ -227,7 +245,6 @@ namespace SortSpace
             return ArrayChunkAA(M, N, n, i1, i2);
         }
         
-
         // true Если значение меньше другого
         //
         public static bool IsLess(int i, int n)
