@@ -1079,6 +1079,74 @@ namespace AlgoTest_1
                 Assert.AreEqual(expay[i], array[i]);
         }
 
+        [TestMethod]
+        public void TestKthOrderTest_1()
+        {
+            int[] array = new int[] { 5, 4, 1, 2, 6, 3, 8, 7 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 7, 3);
+        }
+
+        [TestMethod]
+        public void TestKthOrderTest_2()
+        {
+            int[] a1 = new int[] { 1, 2, 6, 8, 11 };
+            int[] a2 = new int[] { 3, 4, 5, 13, 20 };
+            int[] ar = new int[] { 15, 9, 10, 1, 2, 6, 8, 11, 3, 4, 5, 13, 20, 18, 7, 16, 21, 0 };
+            int[] r = new int[] { 5, 7 };
+            int[] array = new int[] { 15, 9, 10, 2, 6, 8, 11, 1, 5, 3, 13, 4, 20, 18, 7, 16, 21, 0 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 3, 12, 7);
+
+            int c = 0;
+            foreach (int i in list)
+            {
+                Assert.AreEqual(r[c], i);
+                c++;
+            }
+
+            for (int i = 0; i < ar.Length; i++) Assert.AreEqual(ar[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestKthOrderTest_3()
+        {
+            int[] a1 = new int[] { 1, 2, 6, 8, 11 };
+            int[] a2 = new int[] { 3, 4, 5, 13, 20 };
+            int[] ar = new int[] { 15, 9, 10, 1, 2, 6, 8, 11, 3, 4, 5, 13, 20, 18, 7, 16, 21, 0 };
+            int[] r = new int[] { 5, 7 };
+            int[] array = new int[] { 15, 9, 10, 2, 6, 8, 11, 1, 5, 3, 13, 4, 20, 18, 7, 16, 21, 0 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 3, 13, 7);
+
+            int c = 0;
+            foreach (int i in list)
+            {
+                Assert.AreEqual(r[c], i);
+                c++;
+            }
+
+            for (int i = 0; i < ar.Length; i++) Assert.AreEqual(ar[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestKthOrderTest_4()
+        {
+            int[] a1 = new int[] { 2, 6, 9, 10, 15 };
+            int[] a2 = new int[] { 1, 3, 5, 8, 11 };
+            int[] a3 = new int[] { 4, 13 };
+            int[] ar = new int[] { 2, 6, 9, 10, 15, 1, 3, 5, 8, 11, 4, 13, 20, 18, 7, 16, 21, 0 };
+            int[] r = new int[] { 2, 3 };
+            int[] array = new int[] { 15, 9, 10, 2, 6, 8, 11, 1, 5, 3, 13, 4, 20, 18, 7, 16, 21, 0 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 12, 3);
+
+            int c = 0;
+            foreach (int i in list)
+            {
+                Assert.AreEqual(r[c], i);
+                c++;
+            }
+
+            for (int i = 0; i < ar.Length; i++) Assert.AreEqual(ar[i], array[i]);
+        }
+
         private int[] InstantiateArray_1()
         {
             int[] array = new int[5000];

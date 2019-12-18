@@ -123,20 +123,39 @@ namespace SortSpace
 
         public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
         {
-            int[] medians = new int[(R - L - 1) / 5 + 1];
+            
+            int[] medians = new int[(R - L) / 5 + 1];
             int m = 0;
 
-            for (int i = L; i < R; i += 5)
+            for (int i = L; i <= R; i += 5)
             {
-                QuickSortTailOptimization(array, i, i + 5);
-                medians[m++] = i + 2;
+                if (i + 4 > R)
+                {
+                    QuickSortTailOptimization(array, i, R);
+                    medians[m++] = array[((R - i) / 2) + i];
+                }
+                else
+                {
+                    QuickSortTailOptimization(array, i, i + 4);
+                    medians[m++] = array[i + 2];
+                }
             }
 
             QuickSortTailOptimization(medians, 0, medians.Length - 1);
-            int s = medians[medians.Length / 2];
-            
+            int s = FindIndex(array, medians[medians.Length / 2]);
+            List<int> list = new List<int>();
+            if (s < k)
+            {
+                list.Add(s);
+                list.Add(k);
+            }
+            else
+            {
+                list.Add(k);
+                list.Add(s);
+            }
 
-            return new List<int>();
+            return list;
         }
 
 
@@ -198,6 +217,15 @@ namespace SortSpace
         public static bool Compare(int a, int b)
         {
             return a > b;
+        }
+
+        public static int FindIndex(int[] array, int n)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == n) return i;
+            }
+            return -1;
         }
 
         // Находит наименьший элемент массива.
