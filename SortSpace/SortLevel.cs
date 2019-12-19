@@ -132,7 +132,7 @@ namespace SortSpace
                 if (i + 4 > R)
                 {
                     QuickSortTailOptimization(array, i, R);
-                    medians[m++] = array[((R - i) / 2) + i];
+                    medians[m++] = array[((R - i + 1) / 2) + i];
                 }
                 else
                 {
@@ -144,14 +144,19 @@ namespace SortSpace
             QuickSortTailOptimization(medians, 0, medians.Length - 1);
             int s = FindIndex(array, medians[medians.Length / 2]);
             List<int> list = new List<int>();
-            if (s < k)
+            if (s == k)
             {
                 list.Add(s);
                 list.Add(k);
             }
+            else if (s < k)
+            {
+                list.Add(s);
+                list.Add(R);
+            }
             else
             {
-                list.Add(k);
+                list.Add(L);
                 list.Add(s);
             }
 
