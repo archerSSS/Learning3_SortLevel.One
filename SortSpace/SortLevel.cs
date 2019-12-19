@@ -151,13 +151,13 @@ namespace SortSpace
             }
             else if (s < k)
             {
-                list.Add(s);
+                list.Add(s + 1);
                 list.Add(R);
             }
             else
             {
                 list.Add(L);
-                list.Add(s);
+                list.Add(s - 1);
             }
 
             return list;
