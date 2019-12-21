@@ -1090,7 +1090,7 @@ namespace AlgoTest_1
         public void TestKthOrderTest_2()
         {
             int[] ar = new int[] { 15, 9, 10, 1, 2, 6, 8, 11, 3, 4, 5, 13, 20, 18, 7, 16, 21, 0 };
-            int[] r = new int[] { 6, 12 };
+            int[] r = new int[] { 5, 12 };
             int[] array = new int[] { 15, 9, 10, 2, 6, 8, 11, 1, 5, 3, 13, 4, 20, 18, 7, 16, 21, 0 };
             List<int> list = SortLevel.KthOrderStatisticsStep(array, 3, 12, 7);
 
@@ -1108,7 +1108,7 @@ namespace AlgoTest_1
         public void TestKthOrderTest_3()
         {
             int[] ar = new int[] { 15, 9, 10, 1, 2, 6, 8, 11, 3, 4, 5, 13, 20, 18, 7, 16, 21, 0 };
-            int[] r = new int[] { 6, 13 };
+            int[] r = new int[] { 5, 13 };
             int[] array = new int[] { 15, 9, 10, 2, 6, 8, 11, 1, 5, 3, 13, 4, 20, 18, 7, 16, 21, 0 };
             List<int> list = SortLevel.KthOrderStatisticsStep(array, 3, 13, 7);
 
@@ -1126,7 +1126,7 @@ namespace AlgoTest_1
         public void TestKthOrderTest_4()
         {
             int[] ar = new int[] { 2, 6, 9, 10, 15, 1, 3, 5, 8, 11, 4, 13, 20, 18, 7, 16, 21, 0 };
-            int[] r = new int[] { 3, 12 };
+            int[] r = new int[] { 2, 12 };
             int[] array = new int[] { 15, 9, 10, 2, 6, 8, 11, 1, 5, 3, 13, 4, 20, 18, 7, 16, 21, 0 };
             List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 12, 3);
 
@@ -1143,31 +1143,29 @@ namespace AlgoTest_1
         [TestMethod]
         public void TestKthOrderTest_5()
         {
-            int[] aresult1 = new int[] { 4, 5, 6, 7, 8, 1, 2, 3 };
-            int[] aresult2 = new int[] { 4, 5, 6, 1, 2, 3, 7, 8 };
-            int[] aresult3 = new int[] { 4, 5, 6, 1, 2, 3, 7, 8 };
-            int[] r0 = new int[] { 0, 7 };
-            int[] r1 = new int[] { 3, 7 };
-            int[] r2 = new int[] { 5, 5 };
             int[] array = new int[] { 8, 7, 6, 5, 4, 3, 2, 1 };
-            List<int> list = SortLevel.KthOrderStatisticsStep(array, r0[0], r0[1], 5);
+            int[] ind = new int[] { 0, 7, 2, 7, 4, 7, 5, 6 };
+
+            int[] aresult1 = new int[] { 4, 5, 6, 7, 8, 1, 2, 3 };
+            int[] aresult2 = new int[] { 4, 5, 1, 2, 6, 7, 8, 3 };
+            int[] aresult3 = new int[] { 4, 5, 1, 2, 3, 6, 7, 8 };
 
             int c = 0;
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, ind[c++], ind[c++], 5);
+            
             foreach (int i in list)
             {
-                Assert.AreEqual(r1[c], i);
-                c++;
+                Assert.AreEqual(ind[c++], i);
             }
 
             for (int i = 0; i < aresult1.Length; i++) Assert.AreEqual(aresult1[i], array[i]);
 
-            list = SortLevel.KthOrderStatisticsStep(array, r1[0], r1[1], 5);
-
-            c = 0;
+            c -= 2;
+            list = SortLevel.KthOrderStatisticsStep(array, ind[c++], ind[c++], 5);
+            
             foreach (int i in list)
             {
-                Assert.AreEqual(r2[c], i);
-                c++;
+                Assert.AreEqual(ind[c++], i);
             }
 
             for (int i = 0; i < aresult2.Length; i++) Assert.AreEqual(aresult2[i], array[i]);
@@ -1177,9 +1175,11 @@ namespace AlgoTest_1
         public void TestKthOrderTest_6()
         {
             int[] array = new int[] { 4, 15, 6, 1, 9, 3, 0, 7, 2, 12 };
+            int[] ranges = new int[] { 2, 8, 2, 8, 2, 8, 2, 8 };
+
             int[] ar1 = new int[] { 4, 15, 0, 1, 3, 6, 9, 2, 7, 12 };
             int[] ar2 = new int[] { 4, 15, 0, 1, 3, 6, 9, 2, 7, 12 };
-            int[] ranges = new int[] { 2, 8, 2, 7, 2, 3 };
+            
 
             List<int> list = SortLevel.KthOrderStatisticsStep(array, ranges[0], ranges[1], 3);
 
@@ -1202,7 +1202,47 @@ namespace AlgoTest_1
 
             list = SortLevel.KthOrderStatisticsStep(array, ranges[4], ranges[5], 3);
 
-            foreach (int i in list) Assert.AreEqual(3, i);
+            foreach (int i in list)
+            {
+                Assert.AreEqual(ranges[c], i);
+                c++;
+            }
+        }
+
+        [TestMethod]
+        public void TestSortFind_1()
+        {
+            int[] a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+            int s = SortLevel.SortFindMedian(a, 0, 10);
+            Assert.AreEqual(8, s);
+        }
+
+        [TestMethod]
+        public void TestSortFind_2()
+        {
+            int[] a = new int[] { 1 };
+            int s = SortLevel.SortFindMedian(a, 0, 0);
+            Assert.AreEqual(1, s);
+        }
+
+        [TestMethod]
+        public void TestSortFind_3()
+        {
+            int[] a = new int[] { 1, 2 };
+            int s = SortLevel.SortFindMedian(a, 0, 1);
+            Assert.AreEqual(2, s);
+        }
+
+        [TestMethod]
+        public void TestSortFind_4()
+        {
+            int[] a = new int[28];
+            for (int i = 0; i < a.Length; i++)
+            {
+                a[i] = 500 - i * 2;
+            }
+            int s = SortLevel.SortFindMedian(a, 0, 27);
+            Assert.AreEqual(476, s);
         }
 
         private int[] InstantiateArray_1()

@@ -123,26 +123,7 @@ namespace SortSpace
 
         public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
         {
-            
-            int[] medians = new int[(R - L) / 5 + 1];
-            int m = 0;
-
-            for (int i = L; i <= R; i += 5)
-            {
-                if (i + 4 > R)
-                {
-                    QuickSortTailOptimization(array, i, R);
-                    medians[m++] = array[((R - i + 1) / 2) + i];
-                }
-                else
-                {
-                    QuickSortTailOptimization(array, i, i + 4);
-                    medians[m++] = array[i + 2];
-                }
-            }
-
-            QuickSortTailOptimization(medians, 0, medians.Length - 1);
-            int s = FindIndex(array, medians[medians.Length / 2]);
+            int s = FindIndex(array, SortFindMedian(array, L, R));
             List<int> list = new List<int>();
             if (s == k)
             {
@@ -151,13 +132,13 @@ namespace SortSpace
             }
             else if (s < k)
             {
-                list.Add(s + 1);
+                list.Add(s);
                 list.Add(R);
             }
             else
             {
                 list.Add(L);
-                list.Add(s - 1);
+                list.Add(s);
             }
 
             return list;
@@ -241,6 +222,29 @@ namespace SortSpace
             for (; i < array.Length; i++)
                 if (array[i] < array[minor]) minor = i;
             return minor;
+        }
+
+        public static int SortFindMedian(int[] array, int L, int R)
+        {
+            int[] ms = new int[(R - L) / 5 + 1];
+            int m = 0;
+
+            for (int i = L; i <= R; i += 5)
+            {
+                if (i + 4 > R)
+                {
+                    QuickSortTailOptimization(array, i, R);
+                    ms[m++] = array[((R - i + 1) / 2) + i];
+                }
+                else
+                {
+                    QuickSortTailOptimization(array, i, i + 4);
+                    ms[m++] = array[i + 2];
+                }
+            }
+
+            if (ms.Length == 1) return ms[0]; 
+            return SortFindMedian(ms, 0, ms.Length - 1);
         }
 
         // Алгоритм разбиения 1-я ступень
