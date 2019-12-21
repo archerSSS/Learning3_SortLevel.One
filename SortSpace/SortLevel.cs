@@ -123,25 +123,20 @@ namespace SortSpace
 
         public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
         {
-            int s = FindIndex(array, SortFindMedian(array, L, R));
-            List<int> list = new List<int>();
-            if (s == k)
+            int N = ArrayChunkA(array, L, R);
+            if (N == k)
             {
-                list.Add(s);
-                list.Add(k);
+                List<int> list = new List<int>
+                {
+                    N, k
+                };
+                return list;
             }
-            else if (s < k)
+            else if (N < k)
             {
-                list.Add(s);
-                list.Add(R);
+                return KthOrderStatisticsStep(array, N + 1, R, k);
             }
-            else
-            {
-                list.Add(L);
-                list.Add(s);
-            }
-
-            return list;
+            else return KthOrderStatisticsStep(array, L, N - 1, k);
         }
 
 
