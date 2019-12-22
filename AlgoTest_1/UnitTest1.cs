@@ -1083,7 +1083,7 @@ namespace AlgoTest_1
         public void TestKthOrderTest_1()
         {
             int[] array = new int[] { 5, 4, 1, 2, 6, 3, 8, 7 };
-            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 7, 3);
+            List<int> list = SortLevel.KthOrderStatisticsTotal(array, 0, 7, 3);
             foreach (int i in list)
             {
                 Assert.AreEqual(3, i);
@@ -1095,7 +1095,7 @@ namespace AlgoTest_1
         public void TestKthOrderTest_2()
         {
             int[] array = new int[] { 6, 3, 10, 2, 1, 5, 9 };
-            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 6, 3);
+            List<int> list = SortLevel.KthOrderStatisticsTotal(array, 0, 6, 3);
             foreach (int i in list)
             {
                 Assert.AreEqual(3, i);
@@ -1110,7 +1110,7 @@ namespace AlgoTest_1
         public void TestKthOrderTest_3()
         {
             int[] array = new int[] { 0, 2, 1, 4, 5, 8, 9, 20, 11, 15, 3, 16 };
-            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 11, 1);
+            List<int> list = SortLevel.KthOrderStatisticsTotal(array, 0, 11, 1);
             foreach (int i in list)
             {
                 Assert.AreEqual(1, i);
@@ -1125,7 +1125,7 @@ namespace AlgoTest_1
         public void TestKthOrderTest_4()
         {
             int[] array = new int[] { 0, 2, 1, 4, 5, 8, 9, 20, 11, 15, 3, 16 };
-            List<int> list = SortLevel.KthOrderStatisticsStep(array, 6, 11, 10);
+            List<int> list = SortLevel.KthOrderStatisticsTotal(array, 6, 11, 10);
             foreach (int i in list)
             {
                 Assert.AreEqual(10, i);
@@ -1140,8 +1140,60 @@ namespace AlgoTest_1
         {
             int[] array = new int[] { 0, 5, 4, 3, 6, 7, 8 };
             int[] expay = new int[] { 0, 3, 4, 5, 6, 7, 8 };
-            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 6, 4);
+            List<int> list = SortLevel.KthOrderStatisticsTotal(array, 0, 6, 4);
             foreach (int i in list) Assert.AreEqual(4, i);
+            for (int i = 0; i < array.Length; i++) Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestKthOrderStepTest_1()
+        {
+            int[] array = new int[] { 0, 5, 4, 3, 6, 7, 8 };
+            int[] expay = new int[] { 0, 3, 4, 5, 6, 7, 8 };
+            int[] range = new int[] { 2, 6 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 6, 4);
+
+            int c = 0;
+            foreach (int i in list) Assert.AreEqual(range[c++], i);
+            for (int i = 0; i < array.Length; i++) Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestKthOrderStepTest_2()
+        {
+            int[] array = new int[] { 3, 2, 1, 7, 4, 6, 5 };
+            int[] expay = new int[] { 3, 2, 1, 5, 4, 6, 7 };
+            int[] range = new int[] { 0, 5 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 6, 4);
+
+            int c = 0;
+            foreach (int i in list) Assert.AreEqual(range[c++], i);
+            for (int i = 0; i < array.Length; i++) Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestKthOrderStepTest_3()
+        {
+            int[] array = new int[] { 9, 8, 3, 4, 5, 1, 2 };
+            int[] expay = new int[] { 2, 1, 3, 4, 5, 8, 9 };
+            int[] range = new int[] { 4, 6 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 6, 4);
+
+            int c = 0;
+            foreach (int i in list) Assert.AreEqual(range[c++], i);
+            for (int i = 0; i < array.Length; i++) Assert.AreEqual(expay[i], array[i]);
+        }
+
+        [TestMethod]
+        public void TestKthOrderStepTest_4()
+        {
+            int[] array = new int[] { 4, 5, 6, 7, 1, 2, 3 };
+            int[] expay = new int[] { 1, 5, 4, 6, 7, 2, 3 };
+            int[] range = new int[] { 0, 0 };
+            List<int> list = SortLevel.KthOrderStatisticsStep(array, 0, 4, 0);
+
+            int c = 0;
+            foreach (int i in list) Assert.AreEqual(range[c++], i);
             for (int i = 0; i < array.Length; i++) Assert.AreEqual(expay[i], array[i]);
         }
 

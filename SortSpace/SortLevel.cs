@@ -121,7 +121,7 @@ namespace SortSpace
             QuickSortTailOptimization(array, left, right);
         }
 
-        public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
+        public static List<int> KthOrderStatisticsTotal(int[] array, int L, int R, int k)
         {
             int N = ArrayChunkA(array, L, R);
             if (N == k)
@@ -134,9 +134,31 @@ namespace SortSpace
             }
             else if (N < k)
             {
-                return KthOrderStatisticsStep(array, N + 1, R, k);
+                return KthOrderStatisticsTotal(array, N + 1, R, k);
             }
-            else return KthOrderStatisticsStep(array, L, N - 1, k);
+            else return KthOrderStatisticsTotal(array, L, N - 1, k);
+        }
+
+        public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
+        {
+            int N = ArrayChunkA(array, L, R);
+            List<int> list = new List<int>();
+            if (N == k)
+            {
+                list.Add(N);
+                list.Add(k);
+            }
+            else if (N < k)
+            {
+                list.Add(N + 1);
+                list.Add(R);
+            }
+            else
+            {
+                list.Add(L);
+                list.Add(N - 1);
+            }
+            return list;
         }
 
 
