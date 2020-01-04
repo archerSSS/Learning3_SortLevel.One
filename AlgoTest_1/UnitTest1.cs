@@ -1198,6 +1198,113 @@ namespace AlgoTest_1
         }
 
         [TestMethod]
+        public void TestMergeSort_1()
+        {
+            List<int> list = new List<int>() { 4, 5, 6, 7, 1, 2, 3 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_2()
+        {
+            List<int> list = new List<int>() { 4, 5, 1, 2, 3, 7, 6 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(7, list.Count);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_3()
+        {
+            List<int> list = new List<int>() { 3, 2, 5 };
+            int[] expay = new int[] { 2, 3, 5 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(3, list.Count);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_4()
+        {
+            List<int> list = new List<int>() { 3, 2, 1 };
+            int[] expay = new int[] { 1, 2, 3 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(3, list.Count);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_5()
+        {
+            List<int> list = new List<int>() { 3, 2, 1, 4, 5, 6, 7, 8 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(8, list.Count);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_6()
+        {
+            List<int> list = new List<int>() { 2, 1 };
+            int[] expay = new int[] { 1, 2 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(2, list.Count);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_7()
+        {
+            List<int> list = new List<int>() { 1 };
+            int[] expay = new int[] { 1 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(1, list.Count);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_8()
+        {
+            List<int> list = new List<int>() { 7, 6, 5, 4, 3, 2, 1, 0 };
+            int[] expay = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(8, list.Count);
+        }
+
+        [TestMethod]
+        public void TestMergeSort_9()
+        {
+            List<int> list = new List<int>() { 6, 5, 8, 7, 2, 1, 4, 3 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(8, list.Count);
+        }
+
+        [TestMethod]
         public void TestSortFind_1()
         {
             int[] a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };

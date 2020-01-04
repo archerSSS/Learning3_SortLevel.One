@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SortSpace
 {
@@ -10,13 +7,39 @@ namespace SortSpace
     {
         public static void Main(string[] args)
         {
-            int[] ar1 = new int[] { 1, 2, 3, 4, 5 };
-            int[] ar2 = new int[2];
-            ar2[0] = ar1[2];
-            ar2[1] = ar1[4];
+            
 
-            ar2[0] += 10;
-            ar2[1] += 10;
+
+
+            List<int> list1 = new List<int>() { 1, 4 };
+            List<int> list2 = new List<int>() { 3, 7 };
+            List<int> result = new List<int>();
+            
+            while (true)
+            {
+                if (list1.Count == 0 && list2.Count != 0)
+                {
+                    foreach (int num in list2) result.Add(num);
+                    break;
+                }
+                else if (list1.Count != 0 && list2.Count == 0)
+                {
+                    foreach (int num in list1) result.Add(num);
+                    break;
+                }
+                else if (list1.Count == 0 && list2.Count == 0) break;
+                
+                if (list1[0] >= list2[0])
+                {
+                    result.Add(list2[0]);
+                    list2.Remove(list2[0]);
+                }
+                else
+                {
+                    result.Add(list1[0]);
+                    list1.Remove(list1[0]);
+                }
+            }
         }
     }
 }
