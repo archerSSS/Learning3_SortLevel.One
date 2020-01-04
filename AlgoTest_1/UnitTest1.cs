@@ -1305,6 +1305,18 @@ namespace AlgoTest_1
         }
 
         [TestMethod]
+        public void TestMergeSort_10()
+        {
+            List<int> list = new List<int>() { 4, 3, 5, 2, 1 };
+            int[] expay = new int[] { 1, 2, 3, 4, 5 };
+            list = SortLevel.MergeSort(list);
+            int c = 0;
+            foreach (int i in list)
+                Assert.AreEqual(expay[c++], i);
+            Assert.AreEqual(5, list.Count);
+        }
+
+        [TestMethod]
         public void TestSortFind_1()
         {
             int[] a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };

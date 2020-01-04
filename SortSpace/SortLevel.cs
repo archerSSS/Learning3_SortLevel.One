@@ -164,14 +164,7 @@ namespace SortSpace
         public static List<int> MergeSort(List<int> list)
         {
             if (list.Count == 1) return list;
-            /*
-             * 
-            int[] a1 = new int[(array.Length + 1) / 2];
-            int[] a2 = new int[array.Length / 2];
-
-            Array.Copy(array, 0, a1, 0, (array.Length + 1) / 2);
-            Array.Copy(array, (array.Length + 1) / 2, a2, 0, array.Length / 2);
-             */
+            
             List<int> listA = new List<int>();
             List<int> listB = new List<int>();
             for (int i = 0; i < (list.Count + 1) / 2; i++) listA.Add(list[i]);
