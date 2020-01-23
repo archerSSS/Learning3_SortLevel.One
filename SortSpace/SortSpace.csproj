@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HeapSort.cs" />
+    <Compile Include="Ksort.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SortLevel.cs" />
   </ItemGroup>

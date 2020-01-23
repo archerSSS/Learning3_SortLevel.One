@@ -8,11 +8,9 @@ namespace SortSpace
     {
         public static void Main(string[] args)
         {
-            int u = int.MaxValue;
-            int a = int.MaxValue ^ 11;
-            int b = a;
-            //int[] array = new int[short.MaxValue];
-            //HeapSort hs = new HeapSort(array);
+            Ksort k = new Ksort();
+            string s = "b72";
+            int a = k.Index(s);
         }
     }//2147483647
 }
