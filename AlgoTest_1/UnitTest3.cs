@@ -189,5 +189,28 @@ namespace AlgoTest_1
             Assert.IsTrue(ks.Add("a01"));
             Assert.IsTrue(ks.Add("a01"));
         }
+
+        [TestMethod]
+        public void TestKSortAdd_7()
+        {
+            Ksort ks = new Ksort();
+            ks.Add("b11");
+            Assert.IsTrue(ks.items[111] != null);
+            Assert.IsTrue(ks.items[110] == null);
+            Assert.IsTrue(ks.items[101] == null);
+            Assert.IsTrue(ks.items[011] == null);
+            Assert.IsTrue(ks.items[010] == null);
+            Assert.IsTrue(ks.items[001] == null);
+            Assert.IsTrue(ks.items[211] == null);
+            Assert.IsTrue(ks.items[210] == null);
+            Assert.IsTrue(ks.items[201] == null);
+            Assert.IsTrue(ks.items[200] == null);
+
+            ks.Add("a11");
+            Assert.IsTrue(ks.items[011] != null);
+
+            ks.Add("c11");
+            Assert.IsTrue(ks.items[211] != null);
+        }
     }
 }
