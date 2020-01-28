@@ -212,5 +212,34 @@ namespace AlgoTest_1
             ks.Add("c11");
             Assert.IsTrue(ks.items[211] != null);
         }
+
+        [TestMethod]
+        public void TestKSortAdd_8()
+        {
+            Ksort ks = new Ksort();
+            Assert.IsTrue(!ks.Add(""));
+        }
+
+        [TestMethod]
+        public void TestKSortAdd_9()
+        {
+            Ksort ks = new Ksort();
+            Assert.IsTrue(!ks.Add(null));
+        }
+
+        [TestMethod]
+        public void TestKSortAdd_10()
+        {
+            Ksort ks = new Ksort();
+            ks.Index("a00");
+            ks.Index("c54");
+            
+            ks.Add("a00");
+            ks.Add("c54");
+            ks.Add("h99");
+            Assert.AreEqual("a00", ks.items[ks.Index("a00")]);
+            Assert.AreEqual("c54", ks.items[ks.Index("c54")]);
+            Assert.AreEqual("h99", ks.items[ks.Index("h99")]);
+        }
     }
 }
