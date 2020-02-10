@@ -23,14 +23,23 @@ namespace AlgoTest_1
 
         public void Step(int N)
         {
-            int middle = (Right + Left) / 2;
-            
-            if (array[middle] > N)
-                Right = (Right - 1) / 2;
-            else if (array[middle] < N)
-                Left = (Right + 1) / 2;
-            else if (array[middle] == N) result = 1;
-            else result = -1;
+            if (result == 0)
+            {
+                int middle = (Right + Left) / 2;
+                
+                if (N != array[middle])
+                {
+                    if (Left == Right) result = -1;
+                    if (N < array[middle])
+                    {
+                        if (Right - Left == 1) Right = Left;
+                        else Right = middle - 1;
+                    }
+                    else if (Right - Left == 1) Left = Right;
+                    else Left = middle + 1;
+                }
+                else result = 1;
+            }
         }
 
         public int GetResult()
