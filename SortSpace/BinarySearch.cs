@@ -12,7 +12,6 @@ namespace AlgoTest_1
         public int Right;
         private int result;
         private int[] array;
-        
 
         public BinarySearch(int[] array)
         {
@@ -24,7 +23,7 @@ namespace AlgoTest_1
 
         public void Step(int N)
         {
-            int middle = (Right - Left) / 2;
+            int middle = (Right + Left) / 2;
             
             if (array[middle] > N)
                 Right = (Right - 1) / 2;
