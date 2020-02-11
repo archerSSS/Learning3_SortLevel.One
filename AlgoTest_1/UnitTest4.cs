@@ -23,7 +23,7 @@ namespace AlgoTest_1
             BS.Step(3);
             Assert.AreEqual(1, BS.Left);
             Assert.AreEqual(1, BS.Right);
-            Assert.AreEqual(0, BS.GetResult());
+            Assert.AreEqual(1, BS.GetResult());
 
             BS.Step(3);
             Assert.AreEqual(1, BS.GetResult());
@@ -59,11 +59,6 @@ namespace AlgoTest_1
             BS.Step(9);
             Assert.AreEqual(4, BS.Left);
             Assert.AreEqual(4, BS.Right);
-            Assert.AreEqual(0, BS.GetResult());
-
-            BS.Step(9);
-            Assert.AreEqual(4, BS.Left);
-            Assert.AreEqual(4, BS.Right);
             Assert.AreEqual(1, BS.GetResult());
         }
         
@@ -80,11 +75,6 @@ namespace AlgoTest_1
             
             BS.Step(5);
             Assert.AreEqual(3, BS.Left);
-            Assert.AreEqual(4, BS.Right);
-            Assert.AreEqual(0, BS.GetResult());
-
-            BS.Step(5);
-            Assert.AreEqual(4, BS.Left);
             Assert.AreEqual(4, BS.Right);
             Assert.AreEqual(0, BS.GetResult());
 
@@ -118,11 +108,6 @@ namespace AlgoTest_1
             BS.Step(6);
             Assert.AreEqual(5, BS.Left);
             Assert.AreEqual(5, BS.Right);
-            Assert.AreEqual(0, BS.GetResult());
-
-            BS.Step(6);
-            Assert.AreEqual(5, BS.Left);
-            Assert.AreEqual(5, BS.Right);
             Assert.AreEqual(1, BS.GetResult());
 
             BS.Step(6);
@@ -150,11 +135,50 @@ namespace AlgoTest_1
             BS.Step(2);
             Assert.AreEqual(1, BS.Left);
             Assert.AreEqual(1, BS.Right);
-            Assert.AreEqual(0, BS.GetResult());
+            Assert.AreEqual(1, BS.GetResult());
 
             BS.Step(2);
             Assert.AreEqual(1, BS.Left);
             Assert.AreEqual(1, BS.Right);
+            Assert.AreEqual(1, BS.GetResult());
+        }
+
+        [TestMethod]
+        public void Test_StepContinuous_6()
+        {
+            int[] array = new int[] { 0, 1, 2, 3, 4 };
+
+            BinarySearch BS = new BinarySearch(array);
+
+            BS.Step(2);
+            Assert.AreEqual(0, BS.Left);
+            Assert.AreEqual(4, BS.Right);
+            Assert.AreEqual(1, BS.GetResult());
+
+            BS.Step(2);
+            Assert.AreEqual(0, BS.Left);
+            Assert.AreEqual(4, BS.Right);
+            Assert.AreEqual(1, BS.GetResult());
+        }
+
+        [TestMethod]
+        public void Test_StepContinuous_7()
+        {
+            int[] array = new int[] { 0, 1, 2, 3, 4, 5 };
+
+            BinarySearch BS = new BinarySearch(array);
+
+            BS.Step(1);
+            Assert.AreEqual(0, BS.Left);
+            Assert.AreEqual(1, BS.Right);
+            Assert.AreEqual(0, BS.GetResult());
+
+            BS.Step(1);
+            Assert.AreEqual(1, BS.Left);
+            Assert.AreEqual(1, BS.Right);
+            Assert.AreEqual(1, BS.GetResult());
+
+            BS.Step(1);
             Assert.AreEqual(1, BS.GetResult());
         }
 
@@ -307,7 +331,7 @@ namespace AlgoTest_1
             Assert.AreEqual(0, BS.GetResult());
 
             BS.Step(1);
-            Assert.AreEqual(0, BS.GetResult());
+            Assert.AreEqual(1, BS.GetResult());
 
             BS.Step(1);
             Assert.AreEqual(1, BS.GetResult());
