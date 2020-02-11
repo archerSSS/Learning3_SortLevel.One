@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoTest_1
+namespace SortSpace
 {
     public class BinarySearch
     {

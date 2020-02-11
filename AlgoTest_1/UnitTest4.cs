@@ -130,7 +130,34 @@ namespace AlgoTest_1
             Assert.AreEqual(5, BS.Right);
             Assert.AreEqual(1, BS.GetResult());
         }
-        
+
+        //
+        // Second element find.
+        //  6 elements-array
+        //
+        [TestMethod]
+        public void Test_StepContinuous_5()
+        {
+            int[] array = new int[] { 1, 2, 3, 4, 5, 6 };
+
+            BinarySearch BS = new BinarySearch(array);
+
+            BS.Step(2);
+            Assert.AreEqual(0, BS.Left);
+            Assert.AreEqual(1, BS.Right);
+            Assert.AreEqual(0, BS.GetResult());
+
+            BS.Step(2);
+            Assert.AreEqual(1, BS.Left);
+            Assert.AreEqual(1, BS.Right);
+            Assert.AreEqual(0, BS.GetResult());
+
+            BS.Step(2);
+            Assert.AreEqual(1, BS.Left);
+            Assert.AreEqual(1, BS.Right);
+            Assert.AreEqual(1, BS.GetResult());
+        }
+
         [TestMethod]
         public void Test_StepResult_1()
         {
