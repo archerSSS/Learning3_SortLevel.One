@@ -31,12 +31,10 @@ namespace SortSpace
                 {
                     if (Left == Right) result = -1;
                     if (N < array[middle])
-                    {
-                        if (Right - Left == 1) Right = Left;
-                        else Right = middle - 1;
-                    }
-                    else if (Right - Left == 1) Left = Right;
+                        Right = middle - 1;
                     else Left = middle + 1;
+
+                    if (Right < Left || Left > Right) result = -1; 
                 }
                 else result = 1;
             }

@@ -271,14 +271,6 @@ namespace AlgoTest_1
             Assert.AreEqual(0, BS.GetResult());
 
             BS.Step(0);
-            Assert.AreEqual(0, BS.GetResult());
-
-            BS.Step(0);
-            Assert.AreEqual(-1, BS.GetResult());
-            Assert.AreEqual(-1, BS.GetResult());
-
-            BS.Step(0);
-            Assert.AreEqual(-1, BS.GetResult());
             Assert.AreEqual(-1, BS.GetResult());
         }
 
@@ -302,6 +294,23 @@ namespace AlgoTest_1
             BS.Step(0);
             Assert.AreEqual(-1, BS.GetResult());
             Assert.AreEqual(-1, BS.GetResult());
+        }
+
+        [TestMethod]
+        public void Test_StepResult_9()
+        {
+            int[] array = new int[] { 0, 1, 2, 3, 4, 5 };
+
+            BinarySearch BS = new BinarySearch(array);
+
+            BS.Step(1);
+            Assert.AreEqual(0, BS.GetResult());
+
+            BS.Step(1);
+            Assert.AreEqual(0, BS.GetResult());
+
+            BS.Step(1);
+            Assert.AreEqual(1, BS.GetResult());
         }
     }
 }
