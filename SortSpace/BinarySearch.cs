@@ -35,7 +35,8 @@ namespace SortSpace
                     else Left = middle + 1;
 
                     if (Left == Right && N == array[Left]) result = 1;
-                    else if (Right < Left) result = -1; 
+                    else if ((Left == Right && N != array[Left]) || Left > Right) result = -1; 
+
                 }
                 else result = 1;
             }

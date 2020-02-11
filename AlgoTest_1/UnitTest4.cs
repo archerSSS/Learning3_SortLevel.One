@@ -251,9 +251,6 @@ namespace AlgoTest_1
             Assert.AreEqual(0, BS.GetResult());
 
             BS.Step(7);
-            Assert.AreEqual(0, BS.GetResult());
-
-            BS.Step(7);
             Assert.AreEqual(-1, BS.GetResult());
             Assert.AreEqual(-1, BS.GetResult());
 
@@ -273,7 +270,7 @@ namespace AlgoTest_1
             Assert.AreEqual(0, BS.GetResult());
 
             BS.Step(8);
-            Assert.AreEqual(0, BS.GetResult());
+            Assert.AreEqual(-1, BS.GetResult());
 
             BS.Step(8);
             Assert.AreEqual(-1, BS.GetResult());
@@ -309,7 +306,7 @@ namespace AlgoTest_1
             Assert.AreEqual(0, BS.GetResult());
 
             BS.Step(0);
-            Assert.AreEqual(0, BS.GetResult());
+            Assert.AreEqual(-1, BS.GetResult());
 
             BS.Step(0);
             Assert.AreEqual(-1, BS.GetResult());
