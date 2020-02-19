@@ -8,17 +8,15 @@ namespace SortSpace
         /*
          *      // Основные функции. //
          */
-        // Сортировка выбором.
         //
-        public static void SelectionSortStep(int[] array, int i)
+        // Алгоритм разбиения для быстрой сортировки
+        //
+        public static int ArrayChunk(int[] M)
         {
-            if (i < array.Length - 1)
-            {
-                int m = MinorElement(array, i + 1);
-                if (array[m] < array[i]) ExchangeElements(array, i, m);
-            }
+            return ArrayChunkA(M, 0, M.Length - 1);
         }
 
+        //
         // Сортировка пузырьком.
         //      Проходит по всем элементам, проверяя является ли i-й элемент больше (i+1)-го.
         //          Если такой элемент обнаруживается, то он меняется местами с (i+1)-м и возвращает значение false.
@@ -28,6 +26,7 @@ namespace SortSpace
             return BCycle(array, 0);
         }
 
+        //
         // Сортировка пузырьком.
         //
         public static bool BubbleSortAll(int[] array)
@@ -35,16 +34,34 @@ namespace SortSpace
             return ACycle(array, 0);
         }
 
-        // Сортировка вставками.
-        //      Проходит по элементам находящимся в указанной шаговой разности по ячейкам начиная с ячейки i.
-        //          [5, 4, 3, 2, 1] (t = 2, 0)      =>      [3, 4, 1, 2, 5]
+        // 
+        // Бинарный поиск "От края"
         //
-        public static void InsertSortSingle(int[] array, int t, int i)
+        public static bool GallopingSearch(int[] array, int N)
         {
-            if (t <= 0) return;
-            CCycle(array, t, i);
+            if (N < array[0] || N > array[array.Length - 1]) return false; 
+
+            BinarySearch BS = new BinarySearch(array);
+            for (int i = 1; i <= array.Length - 1; i++)
+            {
+                int index = (int)(Math.Pow(2, i) - 2);
+                if (index > array.Length - 1) index = array.Length - 1;
+                if (array[index] == N) return true;
+
+                if (array[index] < N) continue;
+                else if (array[index] > N)
+                {
+                    BS.Left = (int)(Math.Pow(2, i - 1) - 2) + 1;
+                    BS.Right = index;
+                }
+                break;
+            }
+
+            while (BS.GetResult() == 0) BS.Step(N);
+            return BS.GetResult() == 1;
         }
 
+        //
         // Сортировка вставками (Полная).
         //      Проходит по элементам находящимся в указанной шаговой разности по ячейкам начиная с ячейки i.
         //          [5, 4, 3, 2, 1] (t = 2, 0)      =>      [1, 4, 3, 2, 5]
@@ -55,15 +72,18 @@ namespace SortSpace
             if (!CCycle(array, t, i)) InsertSortStep(array, t, i);
         }
 
-        // Сортировка Шелла.
-        //      Проходит по элементам массива в последовательности Кнута
         //
-        public static void ShellSort(int[] array)
+        // Сортировка вставками.
+        //      Проходит по элементам находящимся в указанной шаговой разности по ячейкам начиная с ячейки i.
+        //          [5, 4, 3, 2, 1] (t = 2, 0)      =>      [3, 4, 1, 2, 5]
+        //
+        public static void InsertSortSingle(int[] array, int t, int i)
         {
-            foreach (int s in KnuthSequence(array.Length))
-                for (int i = 0; i < s; i++) InsertSortStep(array, s, i);
+            if (t <= 0) return;
+            CCycle(array, t, i);
         }
 
+        //
         // Создает лист числовых значений в порядке убывания последовательностью Кнута
         //
         public static List<int> KnuthSequence(int array_size)
@@ -73,70 +93,6 @@ namespace SortSpace
             for (; t >= 1; t = CalculateKnuthPrestep(t))
                 list.Add(t);
             return list;
-        }
-
-        // Алгоритм разбиения для быстрой сортировки
-        //
-        public static int ArrayChunk(int[] M)
-        {
-            return ArrayChunkA(M, 0, M.Length - 1);
-        }
-
-        // Алгоритм быстрой сортировки массива
-        //
-        public static void QuickSort(int[] array, int left, int right)
-        {
-            if (left == right) return;
-            int n = ArrayChunkA(array, left, right);
-            if(!(n <= left)) QuickSort(array, left, n - 1);
-            if (!(n >= right)) QuickSort(array, n + 1, right);
-        }
-
-        // Алгоритм быстрой сортировки с хвостовой рекурсией
-        //
-        public static void QuickSortTailOptimization(int[] array, int left, int right)
-        {
-            if (left == right) return;
-
-            // QuickSort алгоритм
-            int n = ArrayChunkA(array, left, right);
-            
-            int i1;
-            int i2;
-            if (right - n < n - left)   { i1 = n; i2 = right; right = n - 1; }
-            else                        { i1 = left; i2 = n; left = n + 1; }
-
-            int temp_left = i1;
-            while (!(i1 >= i2))
-            {
-                if (array[i1] > array[i2]) ExchangeElements(array, i1, i2);
-                i1++;
-                if (i1 == i2)
-                {
-                    i1 = temp_left;
-                    i2--;
-                }
-            }
-
-            QuickSortTailOptimization(array, left, right);
-        }
-
-        public static List<int> KthOrderStatisticsTotal(int[] array, int L, int R, int k)
-        {
-            int N = ArrayChunkA(array, L, R);
-            if (N == k)
-            {
-                List<int> list = new List<int>
-                {
-                    N, k
-                };
-                return list;
-            }
-            else if (N < k)
-            {
-                return KthOrderStatisticsTotal(array, N + 1, R, k);
-            }
-            else return KthOrderStatisticsTotal(array, L, N - 1, k);
         }
 
         public static List<int> KthOrderStatisticsStep(int[] array, int L, int R, int k)
@@ -161,10 +117,28 @@ namespace SortSpace
             return list;
         }
 
+        public static List<int> KthOrderStatisticsTotal(int[] array, int L, int R, int k)
+        {
+            int N = ArrayChunkA(array, L, R);
+            if (N == k)
+            {
+                List<int> list = new List<int>
+                {
+                    N, k
+                };
+                return list;
+            }
+            else if (N < k)
+            {
+                return KthOrderStatisticsTotal(array, N + 1, R, k);
+            }
+            else return KthOrderStatisticsTotal(array, L, N - 1, k);
+        }
+
         public static List<int> MergeSort(List<int> list)
         {
             if (list.Count == 1) return list;
-            
+
             List<int> listA = new List<int>();
             List<int> listB = new List<int>();
             for (int i = 0; i < (list.Count + 1) / 2; i++) listA.Add(list[i]);
@@ -207,6 +181,68 @@ namespace SortSpace
             return result;
         }
 
+        // Алгоритм быстрой сортировки массива
+        //
+        public static void QuickSort(int[] array, int left, int right)
+        {
+            if (left == right) return;
+            int n = ArrayChunkA(array, left, right);
+            if (!(n <= left)) QuickSort(array, left, n - 1);
+            if (!(n >= right)) QuickSort(array, n + 1, right);
+        }
+
+        // Алгоритм быстрой сортировки с хвостовой рекурсией
+        //
+        public static void QuickSortTailOptimization(int[] array, int left, int right)
+        {
+            if (left == right) return;
+
+            // QuickSort алгоритм
+            int n = ArrayChunkA(array, left, right);
+
+            int i1;
+            int i2;
+            if (right - n < n - left) { i1 = n; i2 = right; right = n - 1; }
+            else { i1 = left; i2 = n; left = n + 1; }
+
+            int temp_left = i1;
+            while (!(i1 >= i2))
+            {
+                if (array[i1] > array[i2]) ExchangeElements(array, i1, i2);
+                i1++;
+                if (i1 == i2)
+                {
+                    i1 = temp_left;
+                    i2--;
+                }
+            }
+
+            QuickSortTailOptimization(array, left, right);
+        }
+        
+        //
+        // Сортировка выбором.
+        //
+        public static void SelectionSortStep(int[] array, int i)
+        {
+            if (i < array.Length - 1)
+            {
+                int m = MinorElement(array, i + 1);
+                if (array[m] < array[i]) ExchangeElements(array, i, m);
+            }
+        }
+
+        //
+        // Сортировка Шелла.
+        //      Проходит по элементам массива в последовательности Кнута
+        //
+        public static void ShellSort(int[] array)
+        {
+            foreach (int s in KnuthSequence(array.Length))
+                for (int i = 0; i < s; i++) InsertSortStep(array, s, i);
+        }
+        
+        
 
         /*
          *      // Вспомогательные функции. //
@@ -389,6 +425,51 @@ namespace SortSpace
             array[j] = array[i] - array[j];
             array[i] = array[i] - array[j];
             return true;
+        }
+    }
+
+    public class BinarySearch
+    {
+        public int Left;
+        public int Right;
+        private int result;
+        private int[] array;
+
+        public BinarySearch(int[] array)
+        {
+            Left = 0;
+            Right = array.Length - 1;
+            result = 0;
+            this.array = array;
+        }
+
+
+        public void Step(int N)
+        {
+            if (result == 0)
+            {
+                int middle = (Right + Left) / 2;
+
+                if (N != array[middle])
+                {
+                    if (N < array[middle])
+                        Right = middle - 1;
+                    else Left = middle + 1;
+
+                    if (Left == Right)
+                    {
+                        if (N == array[Left]) result = 1;
+                        else result = -1;
+                    }
+                    else if ((Right - Left) == 1 && !(N == array[Left] || N == array[Right])) result = -1;
+                }
+                else result = 1;
+            }
+        }
+
+        public int GetResult()
+        {
+            return result;
         }
     }
 }

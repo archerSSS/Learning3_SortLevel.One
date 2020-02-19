@@ -8,9 +8,9 @@ namespace SortSpace
     {
         public static void Main(string[] args)
         {
-            Ksort k = new Ksort();
-            char c = '-';
-            int i = (int)Char.GetNumericValue(c);
+            int a = (int)Math.Pow(2, 1);
+            int b = (int)Math.Pow(2, 2);
+            int c = (int)Math.Pow(2, 3);
         }
     }//2147483647
 }
